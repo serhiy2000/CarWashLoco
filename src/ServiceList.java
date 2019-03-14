@@ -29,7 +29,7 @@ public class ServiceList {
                 '}'+'\n';
     }
 
-    public static void fillArrayListCar(Set o){
+    public static void fillArrayListCar(ArrayList o){
         String vehicle = "Car";
         ServiceList service1 = new ServiceList(vehicle,"Wash body", 100);
         ServiceList service2 = new ServiceList(vehicle,"Clean salon", 100);
