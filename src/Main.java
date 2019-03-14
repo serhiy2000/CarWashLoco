@@ -6,18 +6,36 @@ public class Main {
     public static void main(String[] args) {
 
         HashMap menuMap = new HashMap();
-        ServiceList.fillHashMap(menuMap);
+        fillHashMap(menuMap);
 
         String key = "Car";
-        System.out.println(menuMap.get(key));
+        System.out.println("menumap"+menuMap.get(key));
 
-        LinkedHashSet current = menuMap.get(key);
-        System.out.println(current);
+//        LinkedHashSet current = menuMap.get(key);
+//        System.out.println(current);
+//
+//        System.out.println(current.toArray());
 
-        current.
 
 
+    }
+    public static void fillHashMap (HashMap o){
+        LinkedHashSet <ServiceList> serviceCar = new LinkedHashSet();
+        ServiceList.fillArrayListCar(serviceCar);
 
+        ArrayList serviceTruck = new ArrayList<>();
+        ServiceList.fillArrayListTruck(serviceTruck);
+
+        ArrayList serviceMoto = new ArrayList<>();
+        ServiceList.fillArrayListMoto(serviceMoto);
+
+        ArrayList serviceCross = new ArrayList<>();
+        ServiceList.fillArrayListCross(serviceCross);
+
+        o.put("Car",serviceCar);
+        o.put("Truck",serviceTruck);
+        o.put("Moto",serviceMoto);
+        o.put("Cross",serviceCross);
     }
 
 }
