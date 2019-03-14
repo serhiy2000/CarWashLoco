@@ -22,9 +22,10 @@ public class ServiceList {
 
     @Override
     public String toString() {
-        return '\n'+"ServiceList{"+
-                "vehicle='" + vehicle + '\'' +
-                ", service='" + service + '\'' +
+        return '\n'+"Service Type{"+
+//                "vehicle='" + vehicle + '\'' +
+//                ", service='" +
+                service +
                 ", price=" + price +
                 '}';
     }
