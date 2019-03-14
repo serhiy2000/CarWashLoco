@@ -5,18 +5,19 @@ public class Main {
 
     public static void main(String[] args) {
 
-        HashMap menuMap = new HashMap();
-        ServiceList.fillHashMap(menuMap);
+        HashMap <String, ArrayList> menuMap = new HashMap(); // creates menu for main entrance;
+        ServiceList.fillHashMap(menuMap); // fills menu with data from ServiceList;
 
-        String key = "Car";
-        System.out.println("menumap"+menuMap.get(key));
-
-        Set vehicles = menuMap.keySet();
-
+        Set vehicles = menuMap.keySet();  // main menu list
         System.out.println(vehicles);
 
-//        ArrayList current = menuMap.get(key);  // doesn't work. cannot get Array from the map.
-//        System.out.println(current);
+
+        String key = "Car"; // here I'm trying to get list of services available for selected vehicle.
+        System.out.println("menumap"+menuMap.get(key));
+        System.out.println("menumap"+(menuMap.get(key).getClass()));
+
+        ArrayList current = menuMap.get(key);  // doesn't work. cannot get Array from the map.
+        System.out.println(current);
 //
 //        System.out.println(current.toArray());
 

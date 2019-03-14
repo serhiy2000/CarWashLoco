@@ -22,11 +22,11 @@ public class ServiceList {
 
     @Override
     public String toString() {
-        return "ServiceList{" +
+        return '\n'+"ServiceList{"+
                 "vehicle='" + vehicle + '\'' +
                 ", service='" + service + '\'' +
                 ", price=" + price +
-                '}'+'\n';
+                '}';
     }
 
     public static void fillArrayListCar(ArrayList o){
