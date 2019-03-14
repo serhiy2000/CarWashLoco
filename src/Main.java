@@ -6,12 +6,16 @@ public class Main {
     public static void main(String[] args) {
 
         HashMap menuMap = new HashMap();
-        fillHashMap(menuMap);
+        ServiceList.fillHashMap(menuMap);
 
         String key = "Car";
         System.out.println("menumap"+menuMap.get(key));
 
-//        LinkedHashSet current = menuMap.get(key);
+        Set vehicles = menuMap.keySet();
+
+        System.out.println(vehicles);
+
+//        ArrayList current = menuMap.get(key);  // doesn't work. cannot get Array from the map.
 //        System.out.println(current);
 //
 //        System.out.println(current.toArray());
@@ -19,24 +23,7 @@ public class Main {
 
 
     }
-    public static void fillHashMap (HashMap o){
-        LinkedHashSet <ServiceList> serviceCar = new LinkedHashSet();
-        ServiceList.fillArrayListCar(serviceCar);
 
-        ArrayList serviceTruck = new ArrayList<>();
-        ServiceList.fillArrayListTruck(serviceTruck);
-
-        ArrayList serviceMoto = new ArrayList<>();
-        ServiceList.fillArrayListMoto(serviceMoto);
-
-        ArrayList serviceCross = new ArrayList<>();
-        ServiceList.fillArrayListCross(serviceCross);
-
-        o.put("Car",serviceCar);
-        o.put("Truck",serviceTruck);
-        o.put("Moto",serviceMoto);
-        o.put("Cross",serviceCross);
-    }
 
 }
 

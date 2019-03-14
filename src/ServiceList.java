@@ -87,6 +87,25 @@ public class ServiceList {
 
         }
 
+    public static void fillHashMap (HashMap o){
+
+        ArrayList serviceCar = new ArrayList<>();
+        ServiceList.fillArrayListCar(serviceCar);
+
+        ArrayList serviceTruck = new ArrayList<>();
+        ServiceList.fillArrayListTruck(serviceTruck);
+
+        ArrayList serviceMoto = new ArrayList<>();
+        ServiceList.fillArrayListMoto(serviceMoto);
+
+        ArrayList serviceCross = new ArrayList<>();
+        ServiceList.fillArrayListCross(serviceCross);
+
+        o.put("Car",serviceCar);
+        o.put("Truck",serviceTruck);
+        o.put("Moto",serviceMoto);
+        o.put("Cross",serviceCross);
+    }
 
 
 
