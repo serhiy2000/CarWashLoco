@@ -94,16 +94,16 @@ public class ServiceList {
 
     public static void fillHashMap (HashMap o){
 
-        ArrayList serviceCar = new ArrayList<>();
+        ArrayList <ServiceList> serviceCar = new ArrayList<>();
         ServiceList.fillArrayListCar(serviceCar);
 
-        ArrayList serviceTruck = new ArrayList<>();
+        ArrayList <ServiceList> serviceTruck = new ArrayList<>();
         ServiceList.fillArrayListTruck(serviceTruck);
 
-        ArrayList serviceMoto = new ArrayList<>();
+        ArrayList <ServiceList> serviceMoto = new ArrayList<>();
         ServiceList.fillArrayListMoto(serviceMoto);
 
-        ArrayList serviceCross = new ArrayList<>();
+        ArrayList <ServiceList> serviceCross = new ArrayList<>();
         ServiceList.fillArrayListCross(serviceCross);
 
         o.put("Car",serviceCar);

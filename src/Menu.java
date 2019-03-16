@@ -17,20 +17,17 @@ public class Menu {
 //==============================================
         String input, key = "f", service = ";";
         int roomMark = 1;
-        ServiceList current2 = new ServiceList("no","no",1);
 
         do {
             Scanner sc = new Scanner(System.in);
             System.out.println("Please enter your choice:");
             input = sc.nextLine();
 
-
             if ((roomMark == 1) & menuMap.containsKey(input)) {
                 key = input;
                 roomMark = 2;
-                System.out.println("You entered: " + key + "." + '\n' + "We can offer following services:");
-                ArrayList current = menuMap.get(key);
-                System.out.println(current);
+                System.out.println("You entered: " + key + "." + '\n' + "We can offer following services:" + '\n' +  "===============================");
+                System.out.println(menuMap.get(key));
             }
 
 
@@ -44,13 +41,14 @@ public class Menu {
                     System.out.println(vehicles);
                 } // go one level up
 
-//                System.out.println(roomMark + "roomMark");
 
-            ArrayList newnew = menuMap.get(key);
-//            current2 = newnew.get(1);
+            ArrayList newnew = menuMap.get(key);  // here I can get the Arraylist (serviceCar) fom map.
+            System.out.println(newnew.get(1).getClass()+" = newnew.get(1).getClass()");
 
-            System.out.println(newnew.get(1).getClass());
 
+//            QUESTION !!!!!!
+
+            System.out.println(newnew.get(1)); // QUESTION - how can I get element on index 1 from this array?
 
             } while (!(input.equals("q")));
 
