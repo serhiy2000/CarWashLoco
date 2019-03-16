@@ -45,10 +45,10 @@ public class Menu {
             ArrayList newnew = menuMap.get(key);  // here I can get the Arraylist (serviceCar) fom map.
             System.out.println(newnew.get(1).getClass()+" = newnew.get(1).getClass()");
 
-
 //            QUESTION !!!!!!
 
-            System.out.println(newnew.get(1)); // QUESTION - how can I get element on index 1 from this array?
+            System.out.println(newnew.get(1)); // QUESTION - how can I get element index[1] - "Clean salon" from this array?
+
 
             } while (!(input.equals("q")));
 
