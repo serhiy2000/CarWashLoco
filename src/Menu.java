@@ -1,5 +1,4 @@
 import java.lang.reflect.Array;
-import java.sql.SQLOutput;
 import java.util.*;
 
 public class Menu {
@@ -11,13 +10,14 @@ public class Menu {
         HashMap <String, ArrayList> menuMap = new HashMap(); // creates menu for main entrance;
         ServiceList.fillHashMap(menuMap); // fills menu with data from ServiceList;
 
-        System.out.print("We can make service to ");
+        System.out.print("We can make service to: ");
         Set vehicles = menuMap.keySet();  // main menu list
-        System.out.println(vehicles);
-        System.out.println(vehicles.getClass());
+
+        System.out.println(vehicles); // this class is HashMap-KeySet
 //==============================================
-        String input, key = "f";
-        int roomMark = 1, serviceMark;
+        String input, key = "f", service = ";";
+        int roomMark = 1;
+        ServiceList current2 = new ServiceList("no","no",1);
 
         do {
             Scanner sc = new Scanner(System.in);
@@ -28,9 +28,10 @@ public class Menu {
             if ((roomMark == 1) & menuMap.containsKey(input)) {
                 key = input;
                 roomMark = 2;
-                System.out.println("you entered: " + key);
+                System.out.println("You entered: " + key + "." + '\n' + "We can offer following services:");
                 ArrayList current = menuMap.get(key);
                 System.out.println(current);
+            }
 
 
                 if (menuMap.containsKey(key)) {
@@ -40,12 +41,17 @@ public class Menu {
 
                 if (input.equals("back") | input.equals("Back")) {
                     roomMark = 1;
+                    System.out.println(vehicles);
                 } // go one level up
 
-                System.out.println(roomMark + "roomMark");
-                System.out.println(menuMap.get(key).get(1));
+//                System.out.println(roomMark + "roomMark");
 
-            }
+            ArrayList newnew = menuMap.get(key);
+//            current2 = newnew.get(1);
+
+            System.out.println(newnew.get(1).getClass());
+
+
             } while (!(input.equals("q")));
 
         System.out.println("Cycle finished");
@@ -54,18 +60,7 @@ public class Menu {
 
 //===============================================
 
-//        String key = "Car"; // here I'm trying to get list of services available for selected vehicle.
-//        System.out.println("menumap"+menuMap.get(key));
-//        System.out.println("menumap"+(menuMap.get(key).getClass()));
-
-
-//
-//        System.out.println(current.toArray());
-
-
-
     }
-
 
 }
 
@@ -87,7 +82,3 @@ public class Menu {
 //- (optional) при введенні check програма повинна показати список послуг які були замовлені.
 
 
-//        if (sc.hasNextInt()) {
-//        int inputInt = sc.nextInt();
-//        System.out.println("Спасибо! Вы ввели число " + inputInt);
-//        } else {

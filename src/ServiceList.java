@@ -6,7 +6,15 @@ public class ServiceList {
     String service;
     int price;
 
-        public ServiceList(String vehicle, String service, int price) {
+    public String getService() {
+        return service;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public ServiceList(String vehicle, String service, int price) {
         this.vehicle = vehicle;
         this.service = service;
         this.price = price;
@@ -22,12 +30,8 @@ public class ServiceList {
 
     @Override
     public String toString() {
-        return '\n'+"Service Type{"+
-//                "vehicle='" + vehicle + '\'' +
-//                ", service='" +
-                service +
-                ", price=" + price +
-                '}';
+        return '\n'+service  +
+                ", price=" + price;
     }
 
     public static void fillArrayListCar(ArrayList o){
