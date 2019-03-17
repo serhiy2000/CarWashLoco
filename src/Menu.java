@@ -1,14 +1,14 @@
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Menu {
-
-
 
     public static void main() {
 
         HashMap <String, ArrayList> menuMap = new HashMap(); // creates menu for main entrance;
         ServiceList.fillHashMap(menuMap); // fills menu with data from ServiceList;
+
+        Set<ServiceList> basket = new LinkedHashSet<>();
+        Set<Basket> checkout = new LinkedHashSet<>();
 
         System.out.print("We can make service to: ");
         Set vehicles = menuMap.keySet();  // main menu list
@@ -16,7 +16,8 @@ public class Menu {
         System.out.println(vehicles); // this class is HashMap-KeySet
 //==============================================
         String input, key = "f", service = ";";
-        int roomMark = 1;
+        int roomMark = 1, serviceMark = 0;
+        ArrayList <ServiceList> currentServiceList = new ArrayList<>();
 
         do {
             Scanner sc = new Scanner(System.in);
@@ -28,28 +29,23 @@ public class Menu {
                 roomMark = 2;
                 System.out.println("You entered: " + key + "." + '\n' + "We can offer following services:" + '\n' +  "===============================");
                 System.out.println(menuMap.get(key));
+                currentServiceList = menuMap.get(key);
+
             }
 
 
-                if (menuMap.containsKey(key)) {
-                    if ((roomMark == 2) & (menuMap.get(key).contains(input)))
-                        System.out.println("Successfully added to basket");
-                }
+            if (menuMap.containsKey(key)) {
+                if ((roomMark == 2) & (ServiceList.checkService(input, currentServiceList)) >= 0)
+
+//                  add to the backet
+                    System.out.println("Successfully added to basket");
 
                 if (input.equals("back") | input.equals("Back")) {
                     roomMark = 1;
                     System.out.println(vehicles);
                 } // go one level up
 
-
-            ArrayList newnew = menuMap.get(key);  // here I can get the Arraylist (serviceCar) fom map.
-            System.out.println(newnew.get(1).getClass()+" = newnew.get(1).getClass()");
-
-//            QUESTION !!!!!!
-
-            System.out.println(newnew.get(1)); // QUESTION - how can I get element index[1] - "Clean salon" from this array?
-
-
+            }
             } while (!(input.equals("q")));
 
         System.out.println("Cycle finished");

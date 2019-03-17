@@ -35,6 +35,7 @@ public class ServiceList {
     }
 
     public static void fillArrayListCar(ArrayList o){
+
         String vehicle = "Car";
         ServiceList service1 = new ServiceList(vehicle,"Wash body", 100);
         ServiceList service2 = new ServiceList(vehicle,"Clean salon", 100);
@@ -54,6 +55,7 @@ public class ServiceList {
         ServiceList service2 = new ServiceList(vehicle,"Clean salon", 100);
         ServiceList service3 = new ServiceList(vehicle,"Clean tires", 20);
         ServiceList service4 = new ServiceList(vehicle,"Polish", 500);
+
 
             o.add(service1);
             o.add(service2);
@@ -110,6 +112,24 @@ public class ServiceList {
         o.put("Truck",serviceTruck);
         o.put("Moto",serviceMoto);
         o.put("Cross",serviceCross);
+
+            }
+
+    public static int checkService (String currentService, ArrayList <ServiceList> al) {
+
+        int positionMark = 0;
+        for (int i=0; i<al.size(); i++){
+            System.out.println(al.get(i));
+            ServiceList serviceList = al.get(i);
+            String ss = (serviceList.getService());
+
+            if (currentService.equals(ss)) {
+                positionMark = i;
+                System.out.println("CheckService method works");
+            }
+        }
+
+        return positionMark;
     }
 
 
