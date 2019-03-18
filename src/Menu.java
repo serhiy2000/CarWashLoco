@@ -7,52 +7,78 @@ public class Menu {
         HashMap <String, ArrayList> menuMap = new HashMap(); // creates menu for main entrance;
         ServiceList.fillHashMap(menuMap); // fills menu with data from ServiceList;
 
-        Set<ServiceList> basket = new LinkedHashSet<>();
-        Set<Basket> bill = new LinkedHashSet<>();
+        LinkedHashSet <ServiceList> basket = new LinkedHashSet<>();
+        LinkedHashSet <Basket> bill = new LinkedHashSet<>();
 
-        System.out.print("We can make service to: ");
         Set vehicles = menuMap.keySet();  // main menu list
 
-        System.out.println(vehicles); // this class is HashMap-KeySet
 //==============================================
         String input, key = "f", service = ";";
         int roomMark = 1, serviceMark = 0;
         ArrayList <ServiceList> currentServiceList = new ArrayList<>();
+        Boolean checker;
+        Integer positionMark = 99;
 
         do {
+            checker = false;
             Scanner sc = new Scanner(System.in);
-            System.out.println("Please enter your choice:");
+            if (roomMark ==1) System.out.print("We can make service to: \n"+vehicles + "\n");
+
+            System.out.println("Please enter your choice (back=one level up):");
             input = sc.nextLine();
+
 
             if ((roomMark == 1) & menuMap.containsKey(input)) {
                 key = input;
                 roomMark = 2;
-                System.out.println("You entered: " + key + "." + '\n' + "We can offer following services:" + '\n' +  "===============================");
+                System.out.println("You entered: " + key + "." + '\n' + "We can offer following services:");
                 System.out.println(menuMap.get(key));
                 currentServiceList = menuMap.get(key);
 
+            } // shows service list for the selected vehicle
+
+            if (input.equals("print")){
+                System.out.println("In the basket we have:");
+                System.out.println(basket);
+                System.out.println("In the bill we have:");
+                System.out.println(bill);
+            } // prints basket and bill
+
+            // Check if input equals service
+
+                for (int i = 0; i < currentServiceList.size(); i++) {
+                    ServiceList serviceList = currentServiceList.get(i);
+                    String ss = (serviceList.getService());
+
+                    if (input.equals(ss)) {
+                        positionMark = i;
+                        System.out.println("You ordered "+ ss + " for "+key);
+                        checker = true;
+                    }
+                }
+
+            if ((menuMap.containsKey(key)) & (checker == true)) {
+
+                ArrayList <ServiceList> current = menuMap.get(key);
+                ServiceList addServiceList = current.get(positionMark);
+
+                Basket.addServiceBasket(addServiceList, basket, bill);
             }
-            System.out.println(ServiceList.checkService(input, currentServiceList)+ "ServiceList.checkService(input, currentServiceList");
 
-//            it is necessary to add check if input equals servicelist for the vehicle!!!!
-
-
-
-            if (menuMap.containsKey(key)) {
-                if ((roomMark == 2) & (ServiceList.checkService(input, currentServiceList))>=0)
-
-//                  add to the basket
-                    System.out.println("Successfully added to basket");
-
-                if (input.equals("back") | input.equals("Back")) {
+            if (input.equals("bill") | input.equals("Bill")) {
                     roomMark = 1;
-                    System.out.println(vehicles);
-                } // go one level up
+                    System.out.println(bill);
+                }
 
-            }
-            } while (!(input.equals("q")));
+            if (input.equals("back") | input.equals("Back")) {
+                    roomMark = 1;
+                }
+            // go one level up
+
+        } while (!(input.equals("q")));
 
         System.out.println("Cycle finished");
+        Basket.billPrint(bill);
 
 
 

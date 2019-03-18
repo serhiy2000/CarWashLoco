@@ -33,12 +33,12 @@ public class Basket {
 
     @Override
     public String toString() {
-        return "Basket{" +
+        return "\n" +
                 "vehicle='" + vehicle + '\'' +
                 ", service='" + service + '\'' +
                 ", price=" + price +
                 ", quantity=" + quantity +
-                '}';
+                ';';
     }
 
     public static void addServiceBasket (ServiceList serviceToBasket, LinkedHashSet basket, LinkedHashSet bill) {
@@ -55,15 +55,12 @@ public class Basket {
             int quantity = 1;
             Basket addBillItem = new Basket(veh, ser, pri, quantity);
             bill.add(addBillItem);
-            System.out.println(bill);
-
-// я дописав до цього місця.
-//
+            System.out.println("We have in bill:" +"\n"+ bill);
 
         } else {
             System.out.println("We have this service in our basket already/");
 
-            Iterator<Basket> iterator = bill.iterator();
+            Iterator <Basket> iterator = bill.iterator();
             Basket currentItem = iterator.next();
             if (currentItem.getVehicle().equals(serviceToBasket.getVehicle()) & currentItem.getService().equals(serviceToBasket.getService())) {
 
@@ -72,13 +69,25 @@ public class Basket {
                 bill.remove(currentItem);
                 Basket addBillItem = new Basket(serviceToBasket.getVehicle(), serviceToBasket.getService(), serviceToBasket.getPrice(), quantity);
                 bill.add(addBillItem);
-                System.out.println("Now in checkout we have " + bill);
+                System.out.println(bill);
             }
-
 
         }
     }
 
+    public static void billPrint (LinkedHashSet bill){
+        int billSum = 0;
+        Iterator <Basket> iterator = bill.iterator();
+        while (iterator.hasNext()){
+            Basket currentServiceList = iterator.next();
+            billSum = billSum+currentServiceList.getQuantity()*currentServiceList.getPrice();
+            System.out.println(bill);
+            System.out.println("Total sum of ordered services: "+ billSum);
+
+        }
+
+
+    }
 }
 
 
