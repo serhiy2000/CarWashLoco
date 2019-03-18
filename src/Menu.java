@@ -34,6 +34,10 @@ public class Menu {
             }
             System.out.println(ServiceList.checkService(input, currentServiceList)+ "ServiceList.checkService(input, currentServiceList");
 
+//            it is necessary to add check if input equals servicelist for the vehicle!!!!
+
+
+
             if (menuMap.containsKey(key)) {
                 if ((roomMark == 2) & (ServiceList.checkService(input, currentServiceList))>=0)
 
