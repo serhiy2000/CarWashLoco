@@ -115,15 +115,15 @@ public class ServiceList {
 
             }
 
-    public static int checkService (String currentService, ArrayList <ServiceList> al) {
+    public static int checkService (String input, ArrayList <ServiceList> al) {
 
         int positionMark = 0;
         for (int i=0; i<al.size(); i++){
-            System.out.println(al.get(i));
+//            System.out.println(al.get(i));
             ServiceList serviceList = al.get(i);
             String ss = (serviceList.getService());
 
-            if (currentService.equals(ss)) {
+            if (input.equals(ss)) {
                 positionMark = i;
                 System.out.println("CheckService method works");
             }

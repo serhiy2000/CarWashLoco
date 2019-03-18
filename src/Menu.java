@@ -8,7 +8,7 @@ public class Menu {
         ServiceList.fillHashMap(menuMap); // fills menu with data from ServiceList;
 
         Set<ServiceList> basket = new LinkedHashSet<>();
-        Set<Basket> checkout = new LinkedHashSet<>();
+        Set<Basket> bill = new LinkedHashSet<>();
 
         System.out.print("We can make service to: ");
         Set vehicles = menuMap.keySet();  // main menu list
@@ -32,12 +32,12 @@ public class Menu {
                 currentServiceList = menuMap.get(key);
 
             }
-
+            System.out.println(ServiceList.checkService(input, currentServiceList)+ "ServiceList.checkService(input, currentServiceList");
 
             if (menuMap.containsKey(key)) {
-                if ((roomMark == 2) & (ServiceList.checkService(input, currentServiceList)) >= 0)
+                if ((roomMark == 2) & (ServiceList.checkService(input, currentServiceList))>=0)
 
-//                  add to the backet
+//                  add to the basket
                     System.out.println("Successfully added to basket");
 
                 if (input.equals("back") | input.equals("Back")) {
