@@ -33,7 +33,7 @@ public class Basket {
 
     @Override
     public String toString() {
-        return "\n" +
+        return
                 "vehicle='" + vehicle + '\'' +
                 ", service='" + service + '\'' +
                 ", price=" + price +
@@ -82,7 +82,7 @@ public class Basket {
             Basket currentServiceList = iterator.next();
             billSum = billSum+currentServiceList.getQuantity()*currentServiceList.getPrice();
             System.out.println(bill);
-            System.out.println("Total sum of ordered services: "+ billSum);
+            System.out.println("Total sum of ordered services: "+ billSum +" UAH");
 
         }
 

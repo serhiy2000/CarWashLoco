@@ -24,7 +24,7 @@ public class Menu {
             Scanner sc = new Scanner(System.in);
             if (roomMark ==1) System.out.print("We can make service to: \n"+vehicles + "\n");
 
-            System.out.println("Please enter your choice (back=one level up):");
+            System.out.println("Please enter your choice:");
             input = sc.nextLine();
 
 
@@ -37,7 +37,7 @@ public class Menu {
 
             } // shows service list for the selected vehicle
 
-            if (input.equals("print")){
+            if (input.equals("print") | input.equals("Print")){
                 System.out.println("In the basket we have:");
                 System.out.println(basket);
                 System.out.println("In the bill we have:");
@@ -66,8 +66,8 @@ public class Menu {
             }
 
             if (input.equals("bill") | input.equals("Bill")) {
-                    roomMark = 1;
-                    System.out.println(bill);
+                System.out.println("Your current bill:");
+                System.out.println(bill);
                 }
 
             if (input.equals("back") | input.equals("Back")) {
@@ -77,7 +77,7 @@ public class Menu {
 
         } while (!(input.equals("q")));
 
-        System.out.println("Cycle finished");
+        System.out.println("Thank you.\nYou ordered:");
         Basket.billPrint(bill);
 
 
