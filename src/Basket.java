@@ -81,11 +81,10 @@ public class Basket {
         while (iterator.hasNext()){
             Basket currentServiceList = iterator.next();
             billSum = billSum+currentServiceList.getQuantity()*currentServiceList.getPrice();
-            System.out.println(bill);
-            System.out.println("Total sum of ordered services: "+ billSum +" UAH");
 
         }
-
+        System.out.println(bill);
+        System.out.println("Total sum of ordered services: "+ billSum +" UAH");
 
     }
 }

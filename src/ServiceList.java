@@ -70,7 +70,7 @@ public class ServiceList {
 
             o.add(service1);
             o.add(service2);
-//            o.add(service3);
+            o.add(service3);
             o.add(service4);
 
         }
@@ -88,6 +88,7 @@ public class ServiceList {
             o.add(service2);
             o.add(service3);
             o.add(service4);
+            o.add(service5);
 
         }
 
