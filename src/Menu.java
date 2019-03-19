@@ -70,10 +70,11 @@ public class Menu {
                 System.out.println(bill);
                 }
 
-            if (input.equals("back") | input.equals("Back")) {
+            if (input.equals("back") | input.equals("Back")) {   // go one level up
                     roomMark = 1;
+
                 }
-            // go one level up
+            System.out.println("Incorrect input. Please try again.");
 
         } while (!(input.equals("q")));
 
