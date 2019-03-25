@@ -22,31 +22,24 @@ public class Menu {
         do {
             checker = false;
             Scanner sc = new Scanner(System.in);
+
             if (roomMark ==1) System.out.print("We can make service to: \n"+vehicles + "\n");
 
             System.out.println("Please enter your choice:");
+
             input = sc.nextLine();
 
 
-            if ((roomMark == 1) & menuMap.containsKey(input)) {
+            if ((roomMark == 1) & menuMap.containsKey(input)) {    // shows service list for the selected vehicle
                 key = input;
                 roomMark = 2;
                 System.out.println("You entered: " + key + "." + '\n' + "We can offer following services:");
                 System.out.println(menuMap.get(key));
                 currentServiceList = menuMap.get(key);
 
-            } // shows service list for the selected vehicle
+            }
 
-            if (input.equals("print") | input.equals("Print")){
-                System.out.println("In the basket we have:");
-                System.out.println(basket);
-                System.out.println("In the bill we have:");
-                System.out.println(bill);
-            } // prints basket and bill
-
-            // Check if input equals service
-
-                for (int i = 0; i < currentServiceList.size(); i++) {
+                for (int i = 0; i < currentServiceList.size(); i++) {      // Check if input equals service
                     ServiceList serviceList = currentServiceList.get(i);
                     String ss = (serviceList.getService());
 
@@ -57,24 +50,39 @@ public class Menu {
                     }
                 }
 
-            if ((menuMap.containsKey(key)) & (checker == true)) {
-
+            if ((menuMap.containsKey(key)) & (checker == true)) {   // addition to the basket
                 ArrayList <ServiceList> current = menuMap.get(key);
                 ServiceList addServiceList = current.get(positionMark);
-
                 Basket.addServiceBasket(addServiceList, basket, bill);
             }
 
-            if (input.equals("bill") | input.equals("Bill")) {
+            if (!(input.equals("back") |
+                    input.equals("Back") |
+                    input.equals("Bill") |
+                    input.equals("bill") |
+                    input.equals("q") |
+                    input.equals("print") |
+                    input.equals("Print") |
+                    menuMap.containsKey(input) |
+                    checker == true) ) {
+                System.out.println("Incorrect input. Please try again.");
+            }
+
+            if (input.equals("bill") | input.equals("Bill")) {      // prints current bill;
                 System.out.println("Your current bill:");
                 System.out.println(bill);
-                }
+            }
 
-            if (input.equals("back") | input.equals("Back")) {   // go one level up
-                    roomMark = 1;
+            if (input.equals("print") | input.equals("Print")){     // prints basket and bill
+                System.out.println("In the basket we have:");
+                System.out.println(basket);
+                System.out.println("In the bill we have:");
+                System.out.println(bill);
+            }
 
-                }
-            System.out.println("Incorrect input. Please try again.");
+            if (input.equals("back") | input.equals("Back")) {   // go one level up;
+                roomMark = 1;
+            }
 
         } while (!(input.equals("q")));
 
