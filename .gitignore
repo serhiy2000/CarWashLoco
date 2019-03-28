@@ -9,6 +9,7 @@ logs/
 # IDEA
 .idea/
 /out
+*.iml
 
 # Eclipse
 .settings/
