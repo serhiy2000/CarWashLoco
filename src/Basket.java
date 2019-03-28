@@ -58,25 +58,24 @@ public class Basket {
 
         } else {
             System.out.println("We have this service in our basket already. Quantity incremented.");
-            System.out.println("basket"+basket);
-            Iterator <Basket> iterator = basket.iterator();
+            System.out.println("else basket" + basket);
+
+            Iterator<Basket> iterator = bill.iterator();
             Basket currentItem = iterator.next();
 
-            System.out.println("current item = "+currentItem.getVehicle()+currentItem.getService());
+                System.out.println("current item = " + currentItem.getVehicle() + currentItem.getService());
 
+                if (currentItem.getVehicle().equalsIgnoreCase(serviceToBasket.getVehicle()) &
+                        currentItem.getService().equalsIgnoreCase(serviceToBasket.getService())) {
 
+                    int quantity = currentItem.getQuantity() + 1;
 
-            if (currentItem.getVehicle().equalsIgnoreCase(serviceToBasket.getVehicle()) &
-                    currentItem.getService().equalsIgnoreCase(serviceToBasket.getService())) {
+                    bill.remove(currentItem);
+                    Basket addBillItem = new Basket(veh, ser, pri, quantity);
+                    bill.add(addBillItem);
+                    System.out.println(bill);
+                }
 
-                int quantity = currentItem.getQuantity() + 1;
-
-
-                bill.remove(currentItem);
-                Basket addBillItem = new Basket(veh, ser, pri, quantity);
-                bill.add(addBillItem);
-                System.out.println(bill);
-            }
 
         }
     }
