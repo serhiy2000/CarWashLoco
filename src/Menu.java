@@ -7,15 +7,15 @@ public class Menu {
         HashMap <String, ArrayList> menuMap = new HashMap(); // creates menu for main entrance;
         ServiceList.fillHashMap(menuMap); // fills menu with data from ServiceList;
 
-        LinkedHashSet <ServiceList> basket = new LinkedHashSet<>();
-        LinkedHashSet <Basket> bill = new LinkedHashSet<>();
+        Set <ServiceList> basket = new LinkedHashSet<>();
+        Set <Basket> bill = new LinkedHashSet<>();
 
         Set vehicles = menuMap.keySet();  // main menu list
 
 //==============================================
         String input, key = "f", service = ";";
         int roomMark = 1, serviceMark = 0;
-        ArrayList <ServiceList> currentServiceList = new ArrayList<>();
+        List <ServiceList> currentServiceList = new ArrayList<>();
         Boolean checker;
         Integer positionMark = 99;
 
@@ -43,7 +43,7 @@ public class Menu {
                     ServiceList serviceList = currentServiceList.get(i);
                     String ss = (serviceList.getService());
 
-                    if (input.equals(ss)) {
+                    if (input.equalsIgnoreCase(ss)) {
                         positionMark = i;
                         System.out.println("You ordered "+ ss + " for "+key);
                         checker = true;
@@ -56,35 +56,32 @@ public class Menu {
                 Basket.addServiceBasket(addServiceList, basket, bill);
             }
 
-            if (!(input.equals("back") |
-                    input.equals("Back") |
-                    input.equals("Bill") |
-                    input.equals("bill") |
-                    input.equals("q") |
-                    input.equals("print") |
-                    input.equals("Print") |
+            if (!(input.equalsIgnoreCase("back") |
+                    input.equalsIgnoreCase("bill") |
+                    input.equalsIgnoreCase("q") |
+                    input.equalsIgnoreCase("print") |
                     menuMap.containsKey(input) |
                     checker == true) ) {
                 System.out.println("Incorrect input. Please try again.");
             }
 
-            if (input.equals("bill") | input.equals("Bill")) {      // prints current bill;
+            if (input.equalsIgnoreCase("bill")) {      // prints current bill;
                 System.out.println("Your current bill:");
                 System.out.println(bill);
             }
 
-            if (input.equals("print") | input.equals("Print")){     // prints basket and bill
+            if (input.equalsIgnoreCase("print")){     // prints basket and bill
                 System.out.println("In the basket we have:");
                 System.out.println(basket);
                 System.out.println("In the bill we have:");
                 System.out.println(bill);
             }
 
-            if (input.equals("back") | input.equals("Back")) {   // go one level up;
+            if (input.equalsIgnoreCase("back")) {   // go one level up;
                 roomMark = 1;
             }
 
-        } while (!(input.equals("q")));
+        } while (!(input.equalsIgnoreCase("q")));
 
         System.out.println("Thank you.\nYou ordered:");
         Basket.billPrint(bill);

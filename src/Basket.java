@@ -1,5 +1,5 @@
 import java.util.Iterator;
-import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class Basket {
 
@@ -41,9 +41,8 @@ public class Basket {
                 ';';
     }
 
-    public static void addServiceBasket (ServiceList serviceToBasket, LinkedHashSet basket, LinkedHashSet bill) {
+    public static void addServiceBasket (ServiceList serviceToBasket, Set basket, Set bill) {
 
-//        basket.add(serviceToBasket);
         String veh = serviceToBasket.getVehicle();
         String ser = serviceToBasket.getService();
         int pri = serviceToBasket.getPrice();
@@ -58,16 +57,23 @@ public class Basket {
             System.out.println("We have in bill:" +"\n"+ bill);
 
         } else {
-            System.out.println("We have this service in our basket already/");
-
-            Iterator <Basket> iterator = bill.iterator();
+            System.out.println("We have this service in our basket already. Quantity incremented.");
+            System.out.println("basket"+basket);
+            Iterator <Basket> iterator = basket.iterator();
             Basket currentItem = iterator.next();
-            if (currentItem.getVehicle().equals(serviceToBasket.getVehicle()) & currentItem.getService().equals(serviceToBasket.getService())) {
+
+            System.out.println("current item = "+currentItem.getVehicle()+currentItem.getService());
+
+
+
+            if (currentItem.getVehicle().equalsIgnoreCase(serviceToBasket.getVehicle()) &
+                    currentItem.getService().equalsIgnoreCase(serviceToBasket.getService())) {
 
                 int quantity = currentItem.getQuantity() + 1;
 
+
                 bill.remove(currentItem);
-                Basket addBillItem = new Basket(serviceToBasket.getVehicle(), serviceToBasket.getService(), serviceToBasket.getPrice(), quantity);
+                Basket addBillItem = new Basket(veh, ser, pri, quantity);
                 bill.add(addBillItem);
                 System.out.println(bill);
             }
@@ -75,7 +81,7 @@ public class Basket {
         }
     }
 
-    public static void billPrint (LinkedHashSet bill){
+    public static void billPrint (Set bill){
         int billSum = 0;
         Iterator <Basket> iterator = bill.iterator();
         while (iterator.hasNext()){
