@@ -1,1 +1,15 @@
 /*.txt
+# Folders
+target/
+classes/
+.gradle/
+build/
+logs/
+
+# IDEA
+.idea/
+
+# Eclipse
+.settings/
+*.classpath
+*.project
