@@ -2,7 +2,6 @@ CarWash service utility.
 ---
 This is graduate project of LITS Java Base April 2019 group (Serhii, Olya, Dima). In this program you can choose a vehicle type and cleaning services we can offer for it. Welcome to our **CarWashService**!
 
----
 Command| Result
 ------------|-------
 **Car**, **Cross**, **Moto**, **Truck**   |  vehicle selection
