@@ -76,7 +76,6 @@ public class Basket {
                     System.out.println(bill);
                 }
 
-
         }
     }
 
