@@ -46,9 +46,37 @@ public class Basket {
         String veh = serviceToBasket.getVehicle();
         String ser = serviceToBasket.getService();
         int pri = serviceToBasket.getPrice();
-
+        boolean basketAdd = false;
 
 // here when adding new service we check if it is in the list. than it adds. looks like working good
+
+
+//        Iterator <Basket> iterator = bill.iterator();
+//        while (iterator.hasNext()){
+//            Basket currentItem = iterator.next();
+//            if (currentItem.getVehicle().equalsIgnoreCase(serviceToBasket.getVehicle()) &
+//                    currentItem.getService().equalsIgnoreCase(serviceToBasket.getService())) {
+//                int quantity = currentItem.getQuantity() + 1;
+//
+//                bill.remove(currentItem);
+//                Basket addBillItem = new Basket(veh, ser, pri, quantity);
+//                bill.add(addBillItem);
+//                System.out.println(bill);
+//                basketAdd=true;
+//            }
+//
+//        }
+//        System.out.println("цикл длобавки в корзинус");
+//
+//
+//        if (basketAdd=false){
+//            int quantity = 1;
+//            Basket addBillItem = new Basket(veh, ser, pri, quantity);
+//            bill.add(addBillItem);
+//            System.out.println(bill);
+//
+//        }
+
         if (basket.add(serviceToBasket)) {
 
             int quantity = 1;
@@ -58,12 +86,9 @@ public class Basket {
 
         } else {
             System.out.println("We have this service in our basket already. Quantity incremented.");
-            System.out.println("else basket" + basket);
 
             Iterator<Basket> iterator = bill.iterator();
             Basket currentItem = iterator.next();
-
-                System.out.println("current item = " + currentItem.getVehicle() + currentItem.getService());
 
                 if (currentItem.getVehicle().equalsIgnoreCase(serviceToBasket.getVehicle()) &
                         currentItem.getService().equalsIgnoreCase(serviceToBasket.getService())) {
