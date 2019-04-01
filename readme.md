@@ -7,7 +7,6 @@ Command| Result
 **Car**, **Cross**, **Moto**, **Truck**   |  vehicle selection
 **Bill**                |shows current bill with already chosen position
 **Back** | returns to menu with vehicle input.
-**Print** | shows "Basket" list of chosen services and "Bill" - list and quantity of chosen services.
 **q** | finish program and prints all ordered services and sum to pay.
 
 

@@ -39,6 +39,7 @@ public class Basket {
                 ", price=" + price +
                 ", quantity=" + quantity +
                 ';';
+
     }
 
     public static void addServiceBasket (ServiceList serviceToBasket, Set basket, Set bill) {
@@ -82,13 +83,14 @@ public class Basket {
             int quantity = 1;
             Basket addBillItem = new Basket(veh, ser, pri, quantity);
             bill.add(addBillItem);
-            System.out.println("We have in bill:" +"\n"+ bill);
+
 
         } else {
             System.out.println("We have this service in our basket already. Quantity incremented.");
 
             Iterator<Basket> iterator = bill.iterator();
-            Basket currentItem = iterator.next();
+            while (iterator.hasNext()){
+                Basket currentItem = iterator.next();
 
                 if (currentItem.getVehicle().equalsIgnoreCase(serviceToBasket.getVehicle()) &
                         currentItem.getService().equalsIgnoreCase(serviceToBasket.getService())) {
@@ -98,22 +100,35 @@ public class Basket {
                     bill.remove(currentItem);
                     Basket addBillItem = new Basket(veh, ser, pri, quantity);
                     bill.add(addBillItem);
-                    System.out.println(bill);
+
                 }
+            }
 
         }
     }
 
     public static void billPrint (Set bill){
         int billSum = 0;
+
+        String format = "|%1$-8s|%2$-20s|%3$-5s|%4$-8s|\n";
+        for(int i=1; i<=46; i++) System.out.print("=");
+        System.out.println();
+        System.out.format(format, "Vehicle","Service","Price", "Quantity");
+        for(int i=1; i<=46; i++) System.out.print("=");
+        System.out.println();
+
         Iterator <Basket> iterator = bill.iterator();
         while (iterator.hasNext()){
-            Basket currentServiceList = iterator.next();
-            billSum = billSum+currentServiceList.getQuantity()*currentServiceList.getPrice();
-
+            Basket currentItem = iterator.next();
+            billSum = billSum+currentItem.getQuantity()*currentItem.getPrice();
+            System.out.format(format, currentItem.getVehicle(),currentItem.getService(),currentItem.getPrice(),currentItem.getQuantity());
         }
-        System.out.println(bill);
+        for(int i=1; i<=46; i++) System.out.print("=");
+        System.out.println();
         System.out.println("Total sum of ordered services: "+ billSum +" UAH");
+        System.out.println();
+
+
 
     }
 }

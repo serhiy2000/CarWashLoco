@@ -48,7 +48,7 @@ public class ServiceList {
 
         String vehicle = "Truck";
         ServiceList service1 = new ServiceList(vehicle,"Wash", 300);
-        ServiceList service2 = new ServiceList(vehicle,"Salon", 200);
+        ServiceList service2 = new ServiceList(vehicle,"Wash tires", 200);
         ServiceList service3 = new ServiceList(vehicle,"Pressure tires", 50);
         ServiceList service4 = new ServiceList(vehicle,"Polish", 500);
 
@@ -65,7 +65,7 @@ public class ServiceList {
         String vehicle = "Moto";
         ServiceList service1 = new ServiceList(vehicle,"Wash body", 50);
         ServiceList service2 = new ServiceList(vehicle,"Wash engine", 50);
-        ServiceList service3 = new ServiceList(vehicle,"Clean salon", 20);
+        ServiceList service3 = new ServiceList(vehicle,"Clean mirrors", 20);
         ServiceList service4 = new ServiceList(vehicle,"Polish", 500);
 
             o.add(service1);
@@ -82,13 +82,12 @@ public class ServiceList {
         ServiceList service2 = new ServiceList(vehicle,"Clean salon", 100);
         ServiceList service3 = new ServiceList(vehicle,"Clean engine", 20);
         ServiceList service4 = new ServiceList(vehicle,"Polish", 330);
-        ServiceList service5 = new ServiceList(vehicle,"Write", 3);
+        ServiceList service5 = new ServiceList(vehicle,"Air", 3);
 
             o.add(service1);
             o.add(service2);
             o.add(service3);
             o.add(service4);
-            o.add(service5); // service 5
 
         }
 
