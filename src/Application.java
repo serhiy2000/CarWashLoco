@@ -6,8 +6,6 @@ public class Application {
 
         System.out.println("Welcome to CarWash Service! \n+++++++++++++++++++++++++++");
 
-
-
-        Menu.main();
+        Menu.start();
     }
 }

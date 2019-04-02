@@ -1,5 +1,5 @@
 import java.util.Iterator;
-import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class Basket {
 
@@ -39,52 +39,95 @@ public class Basket {
                 ", price=" + price +
                 ", quantity=" + quantity +
                 ';';
+
     }
 
-    public static void addServiceBasket (ServiceList serviceToBasket, LinkedHashSet basket, LinkedHashSet bill) {
+    public static void addServiceBasket (ServiceList serviceToBasket, Set basket, Set bill) {
 
-//        basket.add(serviceToBasket);
         String veh = serviceToBasket.getVehicle();
         String ser = serviceToBasket.getService();
         int pri = serviceToBasket.getPrice();
 
-
 // here when adding new service we check if it is in the list. than it adds. looks like working good
+
+
+//        Iterator <Basket> iterator = bill.iterator();
+//        while (iterator.hasNext()){
+//            Basket currentItem = iterator.next();
+//            if (currentItem.getVehicle().equalsIgnoreCase(serviceToBasket.getVehicle()) &
+//                    currentItem.getService().equalsIgnoreCase(serviceToBasket.getService())) {
+//                int quantity = currentItem.getQuantity() + 1;
+//
+//                bill.remove(currentItem);
+//                Basket addBillItem = new Basket(veh, ser, pri, quantity);
+//                bill.add(addBillItem);
+//                System.out.println(bill);
+//                basketAdd=true;
+//            }
+//
+//        }
+//        System.out.println("цикл длобавки в корзинус");
+//
+//
+//        if (basketAdd=false){
+//            int quantity = 1;
+//            Basket addBillItem = new Basket(veh, ser, pri, quantity);
+//            bill.add(addBillItem);
+//            System.out.println(bill);
+//
+//        }
+
         if (basket.add(serviceToBasket)) {
 
             int quantity = 1;
             Basket addBillItem = new Basket(veh, ser, pri, quantity);
             bill.add(addBillItem);
-            System.out.println("We have in bill:" +"\n"+ bill);
+
 
         } else {
-            System.out.println("We have this service in our basket already/");
+            System.out.println("We have this service in our basket already. Quantity incremented.");
 
-            Iterator <Basket> iterator = bill.iterator();
-            Basket currentItem = iterator.next();
-            if (currentItem.getVehicle().equals(serviceToBasket.getVehicle()) & currentItem.getService().equals(serviceToBasket.getService())) {
+            Iterator<Basket> iterator = bill.iterator();
+            while (iterator.hasNext()){
+                Basket currentItem = iterator.next();
 
-                int quantity = currentItem.getQuantity() + 1;
+                if (currentItem.getVehicle().equalsIgnoreCase(serviceToBasket.getVehicle()) &
+                        currentItem.getService().equalsIgnoreCase(serviceToBasket.getService())) {
 
-                bill.remove(currentItem);
-                Basket addBillItem = new Basket(serviceToBasket.getVehicle(), serviceToBasket.getService(), serviceToBasket.getPrice(), quantity);
-                bill.add(addBillItem);
-                System.out.println(bill);
+                    int quantity = currentItem.getQuantity() + 1;
+
+                    bill.remove(currentItem);
+                    Basket addBillItem = new Basket(veh, ser, pri, quantity);
+                    bill.add(addBillItem);
+
+                }
             }
 
         }
     }
 
-    public static void billPrint (LinkedHashSet bill){
+    public static void billPrint (Set bill){
         int billSum = 0;
+
+        String format = "|%1$-8s|%2$-20s|%3$-5s|%4$-8s|\n";
+        for(int i=1; i<=46; i++) System.out.print("=");
+        System.out.println();
+        System.out.format(format, "Vehicle","Service","Price", "Quantity");
+        for(int i=1; i<=46; i++) System.out.print("=");
+        System.out.println();
+
         Iterator <Basket> iterator = bill.iterator();
         while (iterator.hasNext()){
-            Basket currentServiceList = iterator.next();
-            billSum = billSum+currentServiceList.getQuantity()*currentServiceList.getPrice();
-
+            Basket currentItem = iterator.next();
+            billSum = billSum+currentItem.getQuantity()*currentItem.getPrice();
+            System.out.format(format, currentItem.getVehicle(),currentItem.getService(),currentItem.getPrice(),currentItem.getQuantity());
         }
-        System.out.println(bill);
+        for(int i=1; i<=46; i++) System.out.print("=");
+        System.out.println();
         System.out.println("Total sum of ordered services: "+ billSum +" UAH");
+        System.out.println();
+
+
 
     }
 }

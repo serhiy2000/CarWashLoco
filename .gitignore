@@ -6,12 +6,13 @@ classes/
 build/
 logs/
 
+
 # IDEA
 .idea/
+/out
+*.iml
 
 # Eclipse
 .settings/
 *.classpath
 *.project
-
-
