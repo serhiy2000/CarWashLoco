@@ -82,12 +82,13 @@ public class ServiceList {
         ServiceList service2 = new ServiceList(vehicle,"Clean salon", 100);
         ServiceList service3 = new ServiceList(vehicle,"Clean engine", 20);
         ServiceList service4 = new ServiceList(vehicle,"Polish", 330);
-        ServiceList service5 = new ServiceList(vehicle,"Air", 3);
+        ServiceList service5 = new ServiceList(vehicle,"Pump tires", 3);
 
             o.add(service1);
             o.add(service2);
             o.add(service3);
             o.add(service4);
+            o.add(service5);
 
         }
 

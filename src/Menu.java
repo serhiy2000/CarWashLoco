@@ -10,7 +10,7 @@ public class Menu {
 
     private static final String SERVICE_PATTERN = "(%s)-%s-\t %s \t %s";
 
-    public static void main() {
+    public static void start() {
 
         HashMap <String, ArrayList> menuMap = new HashMap(); // creates menu for main entrance;
         ServiceList.fillHashMap(menuMap); // fills menu with data from ServiceList;
@@ -20,8 +20,6 @@ public class Menu {
 
         Set vehicles = menuMap.keySet();  // main menu list
 
-        String input, key = "f", service = ";";
-        int roomMark = 1, serviceMark = 0;
         String input, key = "f";
         int roomMark = 1;
         List <ServiceList> currentServiceList = new ArrayList<>();

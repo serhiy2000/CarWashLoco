@@ -47,7 +47,6 @@ public class Basket {
         String veh = serviceToBasket.getVehicle();
         String ser = serviceToBasket.getService();
         int pri = serviceToBasket.getPrice();
-        boolean basketAdd = false;
 
 // here when adding new service we check if it is in the list. than it adds. looks like working good
 
