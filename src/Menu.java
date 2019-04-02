@@ -2,15 +2,12 @@ import java.util.*;
 
 public class Menu {
 
-<<<<<<< Updated upstream
+
     public static String firstUpperCase(String word) {
         if (word == null || word.isEmpty()) return ""; //или return word;
         return word.substring(0,1).toUpperCase() + word.substring(1).toLowerCase();
     }
 
-=======
-<<<<<<< Updated upstream
-=======
     public static String firstUpperCase(String word) {
         if (word == null || word.isEmpty()) return "";
         return word.substring(0,1).toUpperCase() + word.substring(1).toLowerCase();
@@ -18,8 +15,6 @@ public class Menu {
 
     private static final String SERVICE_PATTERN = "(%s)-%s-\t %s \t %s";
 
->>>>>>> Stashed changes
->>>>>>> Stashed changes
     public static void main() {
 
         HashMap <String, ArrayList> menuMap = new HashMap(); // creates menu for main entrance;
@@ -30,17 +25,10 @@ public class Menu {
 
         Set vehicles = menuMap.keySet();  // main menu list
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-//==============================================
->>>>>>> Stashed changes
         String input, key = "f", service = ";";
         int roomMark = 1, serviceMark = 0;
-=======
         String input, key = "f";
         int roomMark = 1;
->>>>>>> Stashed changes
         List <ServiceList> currentServiceList = new ArrayList<>();
         Boolean checker;
         Integer positionMark = 99;
