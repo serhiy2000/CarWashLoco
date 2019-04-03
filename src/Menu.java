@@ -10,8 +10,8 @@ public class Menu {
 
     public static void start() {
 
-        HashMap <String, ArrayList> menuMap = new HashMap(); // creates menu for main entrance;
-        ServiceList.fillHashMap(menuMap); // fills menu with data from ServiceList;
+        Map <String, ArrayList> menuMap = new LinkedHashMap<>(); // creates menu for main entrance;
+        ServiceList.fillMap(menuMap); // fills menu with data from ServiceList;
 
         Set <ServiceList> basket = new LinkedHashSet<>();
         Set <Basket> bill = new LinkedHashSet<>();

@@ -4,7 +4,7 @@ This is graduate project of LITS Java Base April 2019 group (Serhii, Olya, Dima)
 
 Command| Result
 ------------|-------
-**Car**, **Cross**, **Moto**, **Truck**   |  vehicle selection
+**Car**, **Crossover**, **Motorcycle**, **Truck**   |  vehicle selection
 **Bill**                |shows current bill with already chosen position
 **Back** | returns to menu with vehicle input.
 **q** | finish program and prints all ordered services and sum to pay.
