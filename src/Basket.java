@@ -80,11 +80,13 @@ public class Basket {
     public static void billPrint (Set bill){
         int billSum = 0;
 
+        int tableLength = 46;
+
         String format = "|%1$-8s|%2$-20s|%3$-5s|%4$-8s|\n";
-        for(int i=1; i<=46; i++) System.out.print("=");
+        for(int i=1; i<=tableLength; i++) System.out.print("=");
         System.out.println();
         System.out.format(format, "Vehicle","Service","Price", "Quantity");
-        for(int i=1; i<=46; i++) System.out.print("=");
+        for(int i=1; i<=tableLength; i++) System.out.print("=");
         System.out.println();
 
         Iterator <Basket> iterator = bill.iterator();
@@ -94,7 +96,7 @@ public class Basket {
             System.out.format(format, currentItem.getVehicle(), currentItem.getService(),
                     currentItem.getPrice(), currentItem.getQuantity());
         }
-        for(int i=1; i<=46; i++) System.out.print("=");
+        for(int i=1; i<=tableLength; i++) System.out.print("=");
         System.out.println();
         System.out.println("Total sum of ordered services: "+ billSum +" USD");
         System.out.println();
