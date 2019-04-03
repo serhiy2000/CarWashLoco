@@ -30,69 +30,74 @@ public class ServiceList {
                 "(price=" + price +")";
     }
 
-    public static void fillArrayListCar(ArrayList o){
+    public static void fillArrayListCar(ArrayList arrayList){
 
         String vehicle = "Car";
-        ServiceList service1 = new ServiceList(vehicle,"Wash", 100);
-        ServiceList service2 = new ServiceList(vehicle,"Salon", 100);
-        ServiceList service3 = new ServiceList(vehicle,"Tires", 20);
-        ServiceList service4 = new ServiceList(vehicle,"Polish", 500);
-            o.add(service1);
-            o.add(service2);
-            o.add(service3);
-            o.add(service4);
+        ServiceList service1 = new ServiceList(vehicle,"Wash", 20);
+        ServiceList service2 = new ServiceList(vehicle,"Tires wash", 10);
+        ServiceList service3 = new ServiceList(vehicle,"Engine wash", 15);
+        ServiceList service4 = new ServiceList(vehicle,"Vacuum", 15);
+        ServiceList service5 = new ServiceList(vehicle,"Polish", 25);
+            arrayList.add(service1);
+            arrayList.add(service2);
+            arrayList.add(service3);
+            arrayList.add(service4);
+            arrayList.add(service5);
 
         }
 
-    public static void fillArrayListTruck(ArrayList o){
+    public static void fillArrayListTruck(ArrayList arrayList){
 
         String vehicle = "Truck";
-        ServiceList service1 = new ServiceList(vehicle,"Wash", 300);
-        ServiceList service2 = new ServiceList(vehicle,"Wash tires", 200);
-        ServiceList service3 = new ServiceList(vehicle,"Pressure tires", 50);
-        ServiceList service4 = new ServiceList(vehicle,"Polish", 500);
+        ServiceList service1 = new ServiceList(vehicle,"Wash", 50);
+        ServiceList service2 = new ServiceList(vehicle,"Tires wash", 20);
+        ServiceList service3 = new ServiceList(vehicle,"Engine wash", 25);
+        ServiceList service4 = new ServiceList(vehicle,"Vacuum", 15);
+        ServiceList service5 = new ServiceList(vehicle,"Polish", 30);
 
 
-            o.add(service1);
-            o.add(service2);
-            o.add(service3);
-            o.add(service4);
-
-        }
-
-    public static void fillArrayListMoto(ArrayList o){
-
-        String vehicle = "Moto";
-        ServiceList service1 = new ServiceList(vehicle,"Wash body", 50);
-        ServiceList service2 = new ServiceList(vehicle,"Wash engine", 50);
-        ServiceList service3 = new ServiceList(vehicle,"Clean mirrors", 20);
-        ServiceList service4 = new ServiceList(vehicle,"Polish", 500);
-
-            o.add(service1);
-            o.add(service2);
-            o.add(service3);
-            o.add(service4);
+            arrayList.add(service1);
+            arrayList.add(service2);
+            arrayList.add(service3);
+            arrayList.add(service4);
+            arrayList.add(service5);
 
         }
 
-    public static void fillArrayListCross(ArrayList o){
 
-        String vehicle = "Cross";
-        ServiceList service1 = new ServiceList(vehicle,"Wash", 120);
-        ServiceList service2 = new ServiceList(vehicle,"Clean salon", 100);
-        ServiceList service3 = new ServiceList(vehicle,"Clean engine", 20);
-        ServiceList service4 = new ServiceList(vehicle,"Polish", 330);
-        ServiceList service5 = new ServiceList(vehicle,"Pump tires", 3);
+    public static void fillArrayListMoto(ArrayList arrayList){
 
-            o.add(service1);
-            o.add(service2);
-            o.add(service3);
-            o.add(service4);
-            o.add(service5);
+        String vehicle = "Motorcycle";
+        ServiceList service1 = new ServiceList(vehicle,"Wash", 10);
+        ServiceList service2 = new ServiceList(vehicle,"Tires wash", 5);
+        ServiceList service3 = new ServiceList(vehicle,"Motor wash", 15);
+        ServiceList service4 = new ServiceList(vehicle,"Polish", 20);
+
+            arrayList.add(service1);
+            arrayList.add(service2);
+            arrayList.add(service3);
+            arrayList.add(service4);
 
         }
 
-    public static void fillHashMap (HashMap o){
+    public static void fillArrayListCross(ArrayList arrayList){
+
+        String vehicle = "Crossover";
+        ServiceList service1 = new ServiceList(vehicle,"Wash", 25);
+        ServiceList service2 = new ServiceList(vehicle,"Tires wash", 10);
+        ServiceList service3 = new ServiceList(vehicle,"Engine wash", 20);
+        ServiceList service4 = new ServiceList(vehicle,"Vacuum", 15);
+        ServiceList service5 = new ServiceList(vehicle,"Polish", 30);
+
+            arrayList.add(service1);
+            arrayList.add(service2);
+            arrayList.add(service3);
+            arrayList.add(service4);
+            arrayList.add(service5);
+
+        }
+
+    public static void fillHashMap (HashMap hashMap){
 
         ArrayList <ServiceList> serviceCar = new ArrayList<>();
         ServiceList.fillArrayListCar(serviceCar);
@@ -106,10 +111,10 @@ public class ServiceList {
         ArrayList <ServiceList> serviceCross = new ArrayList<>();
         ServiceList.fillArrayListCross(serviceCross);
 
-        o.put("Car",serviceCar);
-        o.put("Truck",serviceTruck);
-        o.put("Moto",serviceMoto);
-        o.put("Cross",serviceCross);
+        hashMap.put("Car",serviceCar);
+        hashMap.put("Truck",serviceTruck);
+        hashMap.put("Moto",serviceMoto);
+        hashMap.put("Cross",serviceCross);
 
             }
 
