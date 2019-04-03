@@ -42,7 +42,7 @@ public class Menu {
                 Iterator <ServiceList> iterator = menuMap.get(key).iterator();
                 while (iterator.hasNext()){
                     ServiceList current = iterator.next();
-                    System.out.println(current.getService()+"(price = "+current.getPrice()+") USD");
+                    System.out.println(current.getService()+ " " + current.getDescription() + "(price = "+current.getPrice()+") USD");
                 }
                 currentServiceList = menuMap.get(key);
             }
@@ -50,10 +50,11 @@ public class Menu {
                 for (int i = 0; i < currentServiceList.size(); i++) {      // Check if input equals service
                     ServiceList serviceList = currentServiceList.get(i);
                     String serviceInput = (serviceList.getService());
+                    String serviceDescription = (serviceList.getDescription());
 
                     if (input.equalsIgnoreCase(serviceInput)) {
                         positionMark = i;
-                        System.out.println("You've ordered "+ serviceInput + " for "+key);
+                        System.out.println("You've ordered "+ serviceInput + " " + serviceDescription + " for "+key);
                         checker = true;
                     }
                 }
