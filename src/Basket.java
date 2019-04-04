@@ -80,9 +80,9 @@ public class Basket {
     public static void billPrint (Set bill){
         int billSum = 0;
 
-        int tableLength = 46;
+        int tableLength = 49;
 
-        String format = "|%1$-8s|%2$-20s|%3$-5s|%4$-8s|\n";
+        String format = "|%1$-11s|%2$-20s|%3$-5s|%4$-8s|\n";
         for(int i=1; i<=tableLength; i++) System.out.print("=");
         System.out.println();
         System.out.format(format, "Vehicle","Service","Price", "Quantity");
