@@ -69,11 +69,11 @@ public class Menu {
                     if (input.equalsIgnoreCase(serviceInput)) {
 
                            // addition to the basket
-                            System.out.println("You have ordered "+ serviceInput + " (" + serviceDescription + ") for "+key +". Your current bill is:");
+                            System.out.println("You have ordered "+ serviceInput + " (" + serviceDescription + ") for "+key +".\n");
                             ArrayList <ServiceList> current = menuMap.get(key);
                             ServiceList addServiceList = current.get(i);
                             Basket.addServiceBasket(addServiceList, basket, bill);
-                            Basket.billPrint(bill);
+                            //Basket.billPrint(bill);
                             checker =true;
 
                         System.out.println("You can order another services for your: "+key.toUpperCase());
@@ -101,7 +101,7 @@ public class Menu {
             if (!(input.equalsIgnoreCase("back") |
                     input.equalsIgnoreCase("bill") |
                     input.equalsIgnoreCase("q") |
-                    menuMap.containsKey(input) |
+                    input == key |
                     checker)) {
                 System.out.println("Incorrect input. Please try again.");
 
