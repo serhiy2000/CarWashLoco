@@ -29,7 +29,7 @@ public class Menu {
 
             if (roomMark ==1) System.out.print("Choose your vehicle type: \n" + vehicles + "\n");
 
-            System.out.println("Please enter your choice (vehicle or service, \"q\"-for checkout, \"back\" - back to vehicle selection):");
+            System.out.println("Please enter your choice (vehicle or service, \"q\"-for checkout, \"bill\" - shows your bill, \"back\" - back to vehicle selection):");
 
             input=firstUpperCase(scanner.nextLine());
 

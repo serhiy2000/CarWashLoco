@@ -2,31 +2,31 @@ import java.util.*;
 
 public class ServiceList {
 
-    String vehicle;
-    String service;
-    int price;
-    String description;
+    private String vehicle;
+    private String service;
+    private int price;
+    private String description;
 
-    public ServiceList(String vehicle, String service, int price, String description) {
+    private ServiceList(String vehicle, String service, int price, String description) {
         this.vehicle = vehicle;
         this.service = service;
         this.price = price;
         this.description = description;
     }
 
-    public String getService() {
+    String getService() {
         return service;
     }
 
-    public int getPrice() {
+    int getPrice() {
         return price;
     }
 
-    public String getVehicle() {
+    String getVehicle() {
         return vehicle;
     }
 
-    public String getDescription() { return description; }
+    String getDescription() { return description; }
 
     @Override
     public String toString() {
@@ -34,7 +34,7 @@ public class ServiceList {
                 "(price=" + price +")";
     }
 
-    public static void fillArrayListCar(ArrayList arrayList){
+    private static void fillArrayListCar(ArrayList<ServiceList> arrayList){
 
         String vehicle = "Car";
         ServiceList service1 = new ServiceList(vehicle,"Wash", 20, "Full body wash with active foam");
@@ -50,7 +50,7 @@ public class ServiceList {
 
         }
 
-    public static void fillArrayListCross(ArrayList arrayList){
+    private static void fillArrayListCross(ArrayList<ServiceList> arrayList){
 
         String vehicle = "Crossover";
         ServiceList service1 = new ServiceList(vehicle,"Wash", 25, "Full body wash with active foam");
@@ -67,7 +67,7 @@ public class ServiceList {
 
     }
 
-    public static void fillArrayListMoto(ArrayList arrayList){
+    private static void fillArrayListMoto(ArrayList<ServiceList> arrayList){
 
         String vehicle = "Motorcycle";
         ServiceList service1 = new ServiceList(vehicle,"Wash", 10, "Full body wash with active foam");
@@ -82,7 +82,7 @@ public class ServiceList {
 
     }
 
-    public static void fillArrayListTruck(ArrayList arrayList){
+    private static void fillArrayListTruck(ArrayList<ServiceList> arrayList){
 
         String vehicle = "Truck";
         ServiceList service1 = new ServiceList(vehicle,"Wash", 50, "Full body wash with active foam");
@@ -102,17 +102,17 @@ public class ServiceList {
 
     public static void fillMap(Map menuMap){
 
-        ArrayList <ServiceList> serviceCar = new ArrayList<>();
+        List <ServiceList> serviceCar = new ArrayList<>();
         ServiceList.fillArrayListCar(serviceCar);
 
-        ArrayList <ServiceList> serviceTruck = new ArrayList<>();
-        ServiceList.fillArrayListTruck(serviceTruck);
+        List <ServiceList> serviceTruck = new ArrayList<>();
+        ServiceList.fillArrayListTruck((ArrayList) serviceTruck);
 
-        ArrayList <ServiceList> serviceMoto = new ArrayList<>();
-        ServiceList.fillArrayListMoto(serviceMoto);
+        List <ServiceList> serviceMoto = new ArrayList<>();
+        ServiceList.fillArrayListMoto((ArrayList) serviceMoto);
 
-        ArrayList <ServiceList> serviceCross = new ArrayList<>();
-        ServiceList.fillArrayListCross(serviceCross);
+        List <ServiceList> serviceCross = new ArrayList<>();
+        ServiceList.fillArrayListCross((ArrayList) serviceCross);
 
         menuMap.put("Car",serviceCar);
         menuMap.put("Truck",serviceTruck);
