@@ -2,94 +2,105 @@ import java.util.*;
 
 public class Menu {
 
+    public static String CURRENCY = "uah";
 
-    public static String firstUpperCase(String word) {
+    private static String firstUpperCase(String word) {
         if (word == null || word.isEmpty()) return ""; 
-        return word.substring(0,1).toUpperCase() + word.substring(1).toLowerCase();
+        return word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
     }
 
-    private static final String SERVICE_PATTERN = "(%s)-%s-\t %s \t %s";
+    static void start() {
+        // creates menu for main entrance;
+        Map<String, List<Services>> mainMenu = new LinkedHashMap<>();
 
-    public static void start() {
+        // fills menu with data from Services;
+        Services.fillMainMenu(mainMenu);
 
-        HashMap <String, ArrayList> menuMap = new HashMap(); // creates menu for main entrance;
-        ServiceList.fillHashMap(menuMap); // fills menu with data from ServiceList;
+        Set<Services> basket = new LinkedHashSet<>();
+        Set<Basket> bill = new LinkedHashSet<>();
+        Set<String> vehicles = mainMenu.keySet();
 
-        Set <ServiceList> basket = new LinkedHashSet<>();
-        Set <Basket> bill = new LinkedHashSet<>();
-
-        Set vehicles = menuMap.keySet();  // main menu list
-
-        String input, key = "f";
+        String input, key = "init";
         int roomMark = 1;
-        List <ServiceList> currentServiceList = new ArrayList<>();
-        Boolean checker;
-        Integer positionMark = 99;
+        List<Services> servicesForSelectedVehicle = new ArrayList<>();
+        boolean checker;
 
         do {
+            Scanner scanner = new Scanner(System.in);
+
             checker = false;
-            Scanner sc = new Scanner(System.in);
+            if (roomMark ==1) System.out.print("Choose your vehicle type: \n" + vehicles + "\n");
+            input=firstUpperCase(scanner.nextLine());
+            Menu.clearScreen();
 
-            if (roomMark ==1) System.out.print("We can make service to: \n"+vehicles + "\n");
-
-            System.out.println("Please enter your choice:");
-
-            input = sc.nextLine();
-            input=firstUpperCase(input);
-
-            if ((roomMark == 1) & menuMap.containsKey(input)) {    // shows service list for the selected vehicle
+            // shows servicesForSelectedVehicle list for the selected vehicle
+            if ((roomMark == 1) & mainMenu.containsKey(input)) {
                 key = input;
                 roomMark = 2;
-                System.out.println("You entered: " + key.toUpperCase() + "." + '\n' + "We can offer following services for: "+key.toUpperCase());
-
-                Iterator <ServiceList> iter = menuMap.get(key).iterator();
-                while (iter.hasNext()){
-                    ServiceList current = iter.next();
-                    System.out.println(current.getService()+"(price = "+current.getPrice()+") UAH");
-                }
-                currentServiceList = menuMap.get(key);
+                Menu.clearScreen();
+                System.out.println("You've entered: " + key.toUpperCase());
+                Menu.printTableWithServices(mainMenu,key);
+                servicesForSelectedVehicle = mainMenu.get(key);
             }
 
-                for (int i = 0; i < currentServiceList.size(); i++) {      // Check if input equals service
-                    ServiceList serviceList = currentServiceList.get(i);
-                    String serviceInput = (serviceList.getService());
+            // Check if input equals servicesForSelectedVehicle
+            if (roomMark == 2){
+                for (int i = 0; i < servicesForSelectedVehicle.size(); i++) {     // Check if input equals servicesForSelectedVehicle
+                    Services services = servicesForSelectedVehicle.get(i);
+                    if (input.equalsIgnoreCase(services.getService())) {
 
-                    if (input.equalsIgnoreCase(serviceInput)) {
-                        positionMark = i;
-                        System.out.println("You ordered "+ serviceInput + " for "+key);
-                        checker = true;
+                        // addition to the basket
+                        System.out.println("You have ordered "+ servicesForSelectedVehicle.get(i).getService() + " (" + servicesForSelectedVehicle.get(i).getDescription() + ") for "+key +".\n");
+                        List<Services> current = mainMenu.get(key);
+                        Services addServices = current.get(i);
+                        Basket.addServiceBasket(addServices, basket, bill);
+                        checker =true;
+                        Menu.printTableWithServices(mainMenu, key);
                     }
                 }
-
-            if ((menuMap.containsKey(key)) & (checker == true)) {   // addition to the basket
-                ArrayList <ServiceList> current = menuMap.get(key);
-                ServiceList addServiceList = current.get(positionMark);
-                Basket.addServiceBasket(addServiceList, basket, bill);
-                Basket.billPrint(bill);
             }
 
             if (!(input.equalsIgnoreCase("back") |
                     input.equalsIgnoreCase("bill") |
                     input.equalsIgnoreCase("q") |
-                    menuMap.containsKey(input) |
-                    checker == true) ) {
+                    input.equals(key) |
+                    checker)) {
                 System.out.println("Incorrect input. Please try again.");
-
+                if (roomMark ==2) Menu.printTableWithServices(mainMenu,key);
             }
 
-            if (input.equalsIgnoreCase("bill")) {      // prints current bill;
-            Basket.billPrint(bill);
-            }
+            // prints current bill;
+            if (input.equalsIgnoreCase("bill")) Basket.billPrint(bill);
 
-            if (input.equalsIgnoreCase("back")) {   // go one level up;
-                roomMark = 1;
-            }
+            // go one level up;
+            if (input.equalsIgnoreCase("back")) roomMark = 1;
 
         } while (!(input.equalsIgnoreCase("q")));
 
-        System.out.println("Thank you.\nYou ordered:");
+        System.out.println("Thank you.");
         Basket.billPrint(bill);
+    }
+    private static void clearScreen () {
+        // emulation of clearscreen command
+        for (int i=0; i < 24; i++) System.out.println();
+    }
 
+    private static void printTableWithServices(Map<String,List<Services>> mainMenu, String key) {
+        System.out.println("We can offer following services for your: "+key.toUpperCase());
+        String format = "|%1$-15s|%2$-5s|%3$-8s|%4$-70s|\n";
+        int tableLength = 103;
+        for(int i=1; i<=tableLength; i++) System.out.print("=");
+        System.out.println();
+        System.out.format(format, "Service", "Price", "Currency", "Description");
+        for(int i=1; i<=tableLength; i++) System.out.print("=");
+        System.out.println();
+
+        for (Services current : mainMenu.get(key)) {
+            System.out.format(format, current.getService(), current.getPrice(), CURRENCY, current.getDescription());
+        }
+
+        for(int i=1; i<=tableLength; i++) System.out.print("=");
+        System.out.println();
     }
 
 }
