@@ -8,6 +8,7 @@ public class Basket {
     private String service;
     private int price;
     private int quantity;
+    private static boolean itemInTheBasketAlready;
 
     public Basket(String vehicle, String service, int price, int quantity) {
         this.vehicle = vehicle;
@@ -42,25 +43,24 @@ public class Basket {
                 ';';
     }
 
-    static void addServiceBasket (Services serviceToAddToBasket, Set<Services> basket, Set<Basket> bill) {
+    static void addServiceBasket (Services serviceToAddToBasket, Set<Basket> bill) {
 
+        itemInTheBasketAlready = false;
         String toBasketVehicle = serviceToAddToBasket.getVehicle();
         String toBasketService = serviceToAddToBasket.getService();
         int toBasketPrice = serviceToAddToBasket.getPrice();
 
-        // we check if serviceToBeAdded is in the list, then it is added or incremented
-        if (basket.add(serviceToAddToBasket)) {
-            int quantity = 1;
-            bill.add(new Basket(toBasketVehicle, toBasketService, toBasketPrice, quantity));
-        } else {
-            for (Basket currentItem : bill) {
-                if (currentItem.getVehicle().equalsIgnoreCase(serviceToAddToBasket.getVehicle()) &
-                        currentItem.getService().equalsIgnoreCase(serviceToAddToBasket.getService())) {
-                    int quantity = currentItem.getQuantity() + 1;
-                    bill.remove(currentItem);
-                    bill.add(new Basket(toBasketVehicle, toBasketService, toBasketPrice, quantity));
-                }
+        for (Basket curItem : bill){
+            if (curItem.getVehicle().equalsIgnoreCase(serviceToAddToBasket.getVehicle()) &
+                    curItem.getService().equalsIgnoreCase(serviceToAddToBasket.getService())) {
+                itemInTheBasketAlready = true;
+                bill.remove(curItem);
+                bill.add(new Basket(toBasketVehicle, toBasketService, toBasketPrice, curItem.getQuantity() + 1));
             }
+        }
+        if (itemInTheBasketAlready != true) {
+            bill.add(new Basket(serviceToAddToBasket.getVehicle(), serviceToAddToBasket.getService(),
+                    serviceToAddToBasket.getPrice(), 1));
         }
     }
 

@@ -16,13 +16,11 @@ public class Menu {
         // fills menu with data from Services;
         Services.fillMainMenu(mainMenu);
 
-        Set<Services> basket = new LinkedHashSet<>();
         Set<Basket> bill = new LinkedHashSet<>();
         Set<String> vehicles = mainMenu.keySet();
 
         String input, key = "init";
         int roomMark = 1;
-        List<Services> servicesForSelectedVehicle = new ArrayList<>();
         boolean checker;
 
         do {
@@ -40,20 +38,18 @@ public class Menu {
                 Menu.clearScreen();
                 System.out.println("You've entered: " + key.toUpperCase());
                 Menu.printTableWithServices(mainMenu,key);
-                servicesForSelectedVehicle = mainMenu.get(key);
             }
 
             // Check if input equals servicesForSelectedVehicle
             if (roomMark == 2){
-                for (int i = 0; i < servicesForSelectedVehicle.size(); i++) {     // Check if input equals servicesForSelectedVehicle
-                    Services services = servicesForSelectedVehicle.get(i);
+                for (int i = 0; mainMenu.get(key).size() > i; i++) {     // Check if input equals servicesForSelectedVehicle
+                    Services services = mainMenu.get(key).get(i);
                     if (input.equalsIgnoreCase(services.getService())) {
 
                         // addition to the basket
-                        System.out.println("You have ordered "+ servicesForSelectedVehicle.get(i).getService() + " (" + servicesForSelectedVehicle.get(i).getDescription() + ") for "+key +".\n");
-                        List<Services> current = mainMenu.get(key);
-                        Services addServices = current.get(i);
-                        Basket.addServiceBasket(addServices, basket, bill);
+                        System.out.println("You have ordered "+ mainMenu.get(key).get(i).getService() + " (" + mainMenu.get(key).get(i).getDescription() + ") for "+key +".\n");
+                        Services addServices = mainMenu.get(key).get(i);
+                        Basket.addServiceBasket(addServices, bill);
                         checker =true;
                         Menu.printTableWithServices(mainMenu, key);
                     }
