@@ -1,7 +1,8 @@
-import java.util.Iterator;
 import java.util.Set;
 
 public class Basket {
+
+    static String CURRENCY = "uah";
 
     private String vehicle;
     private String service;
@@ -39,49 +40,34 @@ public class Basket {
                 ", price=" + price +
                 ", quantity=" + quantity +
                 ';';
-
     }
 
-    public static void addServiceBasket (ServiceList serviceToBasket, Set basket, Set bill) {
+    static void addServiceBasket (Services serviceToAddToBasket, Set<Services> basket, Set<Basket> bill) {
 
-        String toBasketVehicle = serviceToBasket.getVehicle();
-        String toBasketService = serviceToBasket.getService();
-        int toBasketPrice = serviceToBasket.getPrice();
+        String toBasketVehicle = serviceToAddToBasket.getVehicle();
+        String toBasketService = serviceToAddToBasket.getService();
+        int toBasketPrice = serviceToAddToBasket.getPrice();
 
-// here when adding new service we check if it is in the list, then it is added
-
-        if (basket.add(serviceToBasket)) {
-
+        // we check if serviceToBeAdded is in the list, then it is added or incremented
+        if (basket.add(serviceToAddToBasket)) {
             int quantity = 1;
-            Basket addBillItem = new Basket(toBasketVehicle, toBasketService, toBasketPrice, quantity);
-            bill.add(addBillItem);
-
-
+            bill.add(new Basket(toBasketVehicle, toBasketService, toBasketPrice, quantity));
         } else {
-            Iterator<Basket> iterator = bill.iterator();
-            while (iterator.hasNext()){
-                Basket currentItem = iterator.next();
-
-                if (currentItem.getVehicle().equalsIgnoreCase(serviceToBasket.getVehicle()) &
-                        currentItem.getService().equalsIgnoreCase(serviceToBasket.getService())) {
-
+            for (Basket currentItem : bill) {
+                if (currentItem.getVehicle().equalsIgnoreCase(serviceToAddToBasket.getVehicle()) &
+                        currentItem.getService().equalsIgnoreCase(serviceToAddToBasket.getService())) {
                     int quantity = currentItem.getQuantity() + 1;
-
                     bill.remove(currentItem);
-                    Basket addBillItem = new Basket(toBasketVehicle, toBasketService, toBasketPrice, quantity);
-                    bill.add(addBillItem);
-
+                    bill.add(new Basket(toBasketVehicle, toBasketService, toBasketPrice, quantity));
                 }
             }
-
         }
     }
 
-    public static void billPrint (Set bill){
+    static void billPrint (Set<Basket> bill){
         int billSum = 0;
-
         int tableLength = 49;
-        System.out.println("Your bill:");
+        System.out.println("You have ordered:");
         String format = "|%1$-11s|%2$-20s|%3$-5s|%4$-8s|\n";
         for(int i=1; i<=tableLength; i++) System.out.print("=");
         System.out.println();
@@ -89,18 +75,15 @@ public class Basket {
         for(int i=1; i<=tableLength; i++) System.out.print("=");
         System.out.println();
 
-        Iterator <Basket> iterator = bill.iterator();
-        while (iterator.hasNext()){
-            Basket currentItem = iterator.next();
+        for (Basket currentItem : bill) {
             billSum = billSum + currentItem.getQuantity() * currentItem.getPrice();
             System.out.format(format, currentItem.getVehicle(), currentItem.getService(),
                     currentItem.getPrice(), currentItem.getQuantity());
         }
         for(int i=1; i<=tableLength; i++) System.out.print("=");
         System.out.println();
-        System.out.println("Total sum of ordered services: "+ billSum +" USD");
+        System.out.println("Total sum of ordered services: " + billSum + " " + CURRENCY);
         System.out.println();
-
     }
 }
 

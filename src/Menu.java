@@ -2,124 +2,105 @@ import java.util.*;
 
 public class Menu {
 
+    public static String CURRENCY = "uah";
 
     private static String firstUpperCase(String word) {
         if (word == null || word.isEmpty()) return ""; 
         return word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
     }
 
-    public static void start() {
+    static void start() {
+        // creates menu for main entrance;
+        Map<String, List<Services>> mainMenu = new LinkedHashMap<>();
 
-        Map <String, ArrayList> menuMap = new LinkedHashMap<>(); // creates menu for main entrance;
-        ServiceList.fillMap(menuMap); // fills menu with data from ServiceList;
+        // fills menu with data from Services;
+        Services.fillMainMenu(mainMenu);
 
-        Set <ServiceList> basket = new LinkedHashSet<>();
-        Set <Basket> bill = new LinkedHashSet<>();
-        Set vehicles = menuMap.keySet();  // main menu list
+        Set<Services> basket = new LinkedHashSet<>();
+        Set<Basket> bill = new LinkedHashSet<>();
+        Set<String> vehicles = mainMenu.keySet();
 
         String input, key = "init";
         int roomMark = 1;
-        List <ServiceList> currentServiceList = new ArrayList<>();
+        List<Services> servicesForSelectedVehicle = new ArrayList<>();
         boolean checker;
 
         do {
-            checker = false; // checks if the command for ordered service is in servicelist
-
             Scanner scanner = new Scanner(System.in);
 
+            checker = false;
             if (roomMark ==1) System.out.print("Choose your vehicle type: \n" + vehicles + "\n");
-
-            System.out.println("Please enter your choice (vehicle or service, \"q\"-for checkout, \"bill\" - shows your bill, \"back\" - back to vehicle selection):");
-
             input=firstUpperCase(scanner.nextLine());
+            Menu.clearScreen();
 
-            for (int i=0; i < 24; i++) System.out.println(); // emulation of clearscreen command
-
-            if ((roomMark == 1) & menuMap.containsKey(input)) {    // shows service list for the selected vehicle
+            // shows servicesForSelectedVehicle list for the selected vehicle
+            if ((roomMark == 1) & mainMenu.containsKey(input)) {
                 key = input;
                 roomMark = 2;
+                Menu.clearScreen();
+                System.out.println("You've entered: " + key.toUpperCase());
+                Menu.printTableWithServices(mainMenu,key);
+                servicesForSelectedVehicle = mainMenu.get(key);
+            }
 
-                System.out.println("You've entered: " + key.toUpperCase() + '\n' + "We would like to offer the following services for your: "+key.toUpperCase());
+            // Check if input equals servicesForSelectedVehicle
+            if (roomMark == 2){
+                for (int i = 0; i < servicesForSelectedVehicle.size(); i++) {     // Check if input equals servicesForSelectedVehicle
+                    Services services = servicesForSelectedVehicle.get(i);
+                    if (input.equalsIgnoreCase(services.getService())) {
 
-                String format = "|%1$-15s|%2$-5s|%3$-8s|%4$-70s|\n";
-                int tableLength = 103;
-                for(int i=1; i<=tableLength; i++) System.out.print("=");
-                System.out.println();
-                System.out.format(format, "Service", "Price", "Currency", "Description");
-                for(int i=1; i<=tableLength; i++) System.out.print("=");
-                System.out.println();
-
-                Iterator <ServiceList> iterator = menuMap.get(key).iterator();
-                while (iterator.hasNext()){
-                    ServiceList current = iterator.next();
-                    System.out.format(format, current.getService(), current.getPrice(), "USD", current.getDescription());
-                }
-                for(int i=1; i<=tableLength; i++) System.out.print("=");
-                System.out.println();
-
-
-                currentServiceList = menuMap.get(key);
-            } // shows service list for the selected vehicle
-
-            for (int i = 0; i < currentServiceList.size(); i++) {     // Check if input equals service
-                    ServiceList serviceList = currentServiceList.get(i);
-                    String serviceInput = (serviceList.getService());
-                    String serviceDescription = (serviceList.getDescription());
-
-                    if (input.equalsIgnoreCase(serviceInput)) {
-
-                           // addition to the basket
-                            System.out.println("You have ordered "+ serviceInput + " (" + serviceDescription + ") for "+key +".\n");
-                            ArrayList <ServiceList> current = menuMap.get(key);
-                            ServiceList addServiceList = current.get(i);
-                            Basket.addServiceBasket(addServiceList, basket, bill);
-                            //Basket.billPrint(bill);
-                            checker =true;
-
-                        System.out.println("You can order another services for your: "+key.toUpperCase());
-
-                        String format = "|%1$-15s|%2$-5s|%3$-8s|%4$-70s|\n";
-                        int tableLength = 103;
-                        for(int j=1; j<=tableLength; j++) System.out.print("=");
-                        System.out.println();
-                        System.out.format(format, "Service", "Price", "Currency", "Description");
-                        for(int j=1; j<=tableLength; j++) System.out.print("=");
-                        System.out.println();
-
-                        Iterator <ServiceList> iterator = menuMap.get(key).iterator();
-                        while (iterator.hasNext()){
-                            ServiceList currentList = iterator.next();
-                            System.out.format(format, currentList.getService(), currentList.getPrice(), "USD", currentList.getDescription());
-                        }
-                        for(int j=1; j<=tableLength; j++) System.out.print("=");
-                        System.out.println();
-
-
+                        // addition to the basket
+                        System.out.println("You have ordered "+ servicesForSelectedVehicle.get(i).getService() + " (" + servicesForSelectedVehicle.get(i).getDescription() + ") for "+key +".\n");
+                        List<Services> current = mainMenu.get(key);
+                        Services addServices = current.get(i);
+                        Basket.addServiceBasket(addServices, basket, bill);
+                        checker =true;
+                        Menu.printTableWithServices(mainMenu, key);
                     }
-                } // Check if input equals service
+                }
+            }
 
             if (!(input.equalsIgnoreCase("back") |
                     input.equalsIgnoreCase("bill") |
                     input.equalsIgnoreCase("q") |
-                    input == key |
+                    input.equals(key) |
                     checker)) {
                 System.out.println("Incorrect input. Please try again.");
-
+                if (roomMark ==2) Menu.printTableWithServices(mainMenu,key);
             }
 
-            if (input.equalsIgnoreCase("bill")) {      // prints current bill;
-            Basket.billPrint(bill);
-            }
+            // prints current bill;
+            if (input.equalsIgnoreCase("bill")) Basket.billPrint(bill);
 
-            if (input.equalsIgnoreCase("back")) {   // go one level up;
-                roomMark = 1;
-            }
+            // go one level up;
+            if (input.equalsIgnoreCase("back")) roomMark = 1;
 
         } while (!(input.equalsIgnoreCase("q")));
 
-        System.out.println("Thank you.\nYou've ordered:");
+        System.out.println("Thank you.");
         Basket.billPrint(bill);
+    }
+    private static void clearScreen () {
+        // emulation of clearscreen command
+        for (int i=0; i < 24; i++) System.out.println();
+    }
 
+    private static void printTableWithServices(Map<String,List<Services>> mainMenu, String key) {
+        System.out.println("We can offer following services for your: "+key.toUpperCase());
+        String format = "|%1$-15s|%2$-5s|%3$-8s|%4$-70s|\n";
+        int tableLength = 103;
+        for(int i=1; i<=tableLength; i++) System.out.print("=");
+        System.out.println();
+        System.out.format(format, "Service", "Price", "Currency", "Description");
+        for(int i=1; i<=tableLength; i++) System.out.print("=");
+        System.out.println();
+
+        for (Services current : mainMenu.get(key)) {
+            System.out.format(format, current.getService(), current.getPrice(), CURRENCY, current.getDescription());
+        }
+
+        for(int i=1; i<=tableLength; i++) System.out.print("=");
+        System.out.println();
     }
 
 }
