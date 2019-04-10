@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Menu {
 
-    public static String CURRENCY = "uah";
+    private static String CURRENCY = "uah";
 
     private static String firstUpperCase(String word) {
         if (word == null || word.isEmpty()) return ""; 
@@ -17,52 +17,68 @@ public class Menu {
         Services.fillMainMenu(mainMenu);
 
         Set<Basket> bill = new LinkedHashSet<>();
-        Set<String> vehicles = mainMenu.keySet();
-
         String input, key = "init";
         int roomMark = 1;
         boolean checker;
+        boolean checkerForWrongInput;
+        String convertToWordCommand;
+        String convertToIntegerCommand;
 
         do {
             Scanner scanner = new Scanner(System.in);
 
             checker = false;
-            if (roomMark ==1) System.out.print("Choose your vehicle type: \n" + vehicles + "\n");
+            checkerForWrongInput = false;
+
+            if (roomMark == 1) System.out.print("Choose your vehicle type: \n" + mainMenu.keySet() + "\n");
             input=firstUpperCase(scanner.nextLine());
             Menu.clearScreen();
 
             // shows servicesForSelectedVehicle list for the selected vehicle
-            if ((roomMark == 1) & mainMenu.containsKey(input)) {
-                key = input;
-                roomMark = 2;
-                Menu.clearScreen();
-                System.out.println("You've entered: " + key.toUpperCase());
-                Menu.printTableWithServices(mainMenu,key);
-            }
-
-            // Check if input equals servicesForSelectedVehicle
-            if (roomMark == 2){
-                for (int i = 0; mainMenu.get(key).size() > i; i++) {     // Check if input equals servicesForSelectedVehicle
-                    Services services = mainMenu.get(key).get(i);
-                    if (input.equalsIgnoreCase(services.getService())) {
-
-                        // addition to the basket
-                        System.out.println("You have ordered "+ mainMenu.get(key).get(i).getService() + " (" + mainMenu.get(key).get(i).getDescription() + ") for "+key +".\n");
-                        Services addServices = mainMenu.get(key).get(i);
-                        Basket.addServiceBasket(addServices, bill);
-                        checker =true;
-                        Menu.printTableWithServices(mainMenu, key);
+            if (roomMark == 1){
+                for (String iteratorWithinKeySet : mainMenu.keySet()){
+                    convertToWordCommand = iteratorWithinKeySet.replaceAll("[^A-Za-z]","");
+                    convertToIntegerCommand = iteratorWithinKeySet.replaceAll("[^0-9]","");
+                    if ((input.equalsIgnoreCase(convertToWordCommand) || input.equals(convertToIntegerCommand))) key = iteratorWithinKeySet;
+                    if (roomMark == 1 & key.equals(iteratorWithinKeySet)){
+                        roomMark = 2;
+                        Menu.clearScreen();
+                        System.out.println("You've entered: " + key.toUpperCase().replaceAll("[^A-za-z]",""));
+                        Menu.printTableWithServices(mainMenu,key);
+                        checkerForWrongInput = true;
                     }
                 }
             }
 
+            // Check if input equals servicesForSelectedVehicle, than adds to the basket
+            if (roomMark == 2 & !checkerForWrongInput){
+                for (int i = 0; mainMenu.get(key).size() > i; i++) {     // Check if input equals servicesForSelectedVehicle
+                    Services servicesForSelectedVehicle = mainMenu.get(key).get(i);
+                    convertToWordCommand = servicesForSelectedVehicle.getService().replaceAll("[^A-Za-z]","");
+                    convertToIntegerCommand = servicesForSelectedVehicle.getService().replaceAll("[^0-9]","");
+
+                    if (input.equalsIgnoreCase(convertToWordCommand) || input.equals(convertToIntegerCommand)) {
+                        // addition to the basket
+                        System.out.println("You have ordered "+ mainMenu.get(key).get(i).getService().replaceAll("[^A-Za-z]","") +
+                                " (" + mainMenu.get(key).get(i).getDescription() + ") for "+key +".\n");
+                        Services addServices = mainMenu.get(key).get(i);
+                        Basket.addServiceBasket(addServices, bill);
+                        checker = true;
+                        Menu.printTableWithServices(mainMenu, key);
+                        checkerForWrongInput=true;
+                    }
+                }
+            }
+
+            // incorrect input runover;
             if (!(input.equalsIgnoreCase("back") |
                     input.equalsIgnoreCase("bill") |
                     input.equalsIgnoreCase("q") |
                     input.equals(key) |
-                    checker)) {
+                    checker |
+                    checkerForWrongInput)) {
                 System.out.println("Incorrect input. Please try again.");
-                if (roomMark ==2) Menu.printTableWithServices(mainMenu,key);
+                if (roomMark == 2) Menu.printTableWithServices(mainMenu,key);
             }
 
             // prints current bill;
@@ -76,6 +92,7 @@ public class Menu {
         System.out.println("Thank you.");
         Basket.billPrint(bill);
     }
+
     private static void clearScreen () {
         // emulation of clearscreen command
         for (int i=0; i < 24; i++) System.out.println();

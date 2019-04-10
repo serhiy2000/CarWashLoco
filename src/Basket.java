@@ -2,7 +2,7 @@ import java.util.Set;
 
 public class Basket {
 
-    static String CURRENCY = "uah";
+    private static String CURRENCY = "uah";
 
     private String vehicle;
     private String service;
@@ -58,7 +58,7 @@ public class Basket {
                 bill.add(new Basket(toBasketVehicle, toBasketService, toBasketPrice, curItem.getQuantity() + 1));
             }
         }
-        if (itemInTheBasketAlready != true) {
+        if (!itemInTheBasketAlready) {
             bill.add(new Basket(serviceToAddToBasket.getVehicle(), serviceToAddToBasket.getService(),
                     serviceToAddToBasket.getPrice(), 1));
         }
@@ -77,8 +77,11 @@ public class Basket {
 
         for (Basket currentItem : bill) {
             billSum = billSum + currentItem.getQuantity() * currentItem.getPrice();
-            System.out.format(format, currentItem.getVehicle(), currentItem.getService(),
-                    currentItem.getPrice(), currentItem.getQuantity());
+            System.out.format(format,
+                    currentItem.getVehicle().replaceAll("[^A-Za-z]",""),
+                    currentItem.getService().replaceAll("[^A-Za-z]",""),
+                    currentItem.getPrice(),
+                    currentItem.getQuantity());
         }
         for(int i=1; i<=tableLength; i++) System.out.print("=");
         System.out.println();
