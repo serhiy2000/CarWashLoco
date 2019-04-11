@@ -43,7 +43,7 @@ public class Menu {
                     if (roomMark == 1 & key.equals(iteratorWithinKeySet)){
                         roomMark = 2;
                         Menu.clearScreen();
-                        System.out.println("You've entered: " + key.toUpperCase().replaceAll("[^A-za-z]",""));
+                        System.out.println("You've entered: " + key.toUpperCase().replaceAll("[^A-Za-z]",""));
                         Menu.printTableWithServices(mainMenu,key);
                         checkerForWrongInput = true;
                     }
@@ -115,7 +115,6 @@ public class Menu {
         for(int i=1; i<=tableLength; i++) System.out.print("=");
         System.out.println();
     }
-
 }
 
 

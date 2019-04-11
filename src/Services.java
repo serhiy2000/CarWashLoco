@@ -50,27 +50,27 @@ public class Services {
 
     private static void fillServicesForCross(List<Services> services){
 
-        services.add(new Services(CROSS,"Wash", 25, "Full body wash with active foam"));
-        services.add(new Services(CROSS,"Tires wash", 10, "Tires wash with water and active foam"));
-        services.add(new Services(CROSS,"Engine wash", 20, "Engine wash with water-soluble engine degreaser"));
-        services.add(new Services(CROSS,"Vacuum", 15, "Interior cleaning with the vacuum cleaner"));
-        services.add(new Services(CROSS,"Polish", 30, "Polishing with an electric polisher and covering a crossover with a wax"));
+        services.add(new Services(CROSS,"1.Wash", 25, "Full body wash with active foam"));
+        services.add(new Services(CROSS,"2.Tires wash", 10, "Tires wash with water and active foam"));
+        services.add(new Services(CROSS,"3.Engine wash", 20, "Engine wash with water-soluble engine degreaser"));
+        services.add(new Services(CROSS,"4.Vacuum", 15, "Interior cleaning with the vacuum cleaner"));
+        services.add(new Services(CROSS,"5.Polish", 30, "Polishing with an electric polisher and covering a crossover with a wax"));
     }
 
     private static void fillServicesForMoto(List<Services> services){
 
-        services.add(new Services(MOTO,"Wash", 10, "Full body wash with active foam"));
-        services.add(new Services(MOTO,"Tires wash", 5, "Tires wash with water and active foam"));
-        services.add(new Services(MOTO,"Engine wash", 15, "Engine wash with water-soluble engine degreaser"));
-        services.add(new Services(MOTO,"Polish", 20, "Polishing with an electric polisher and covering a fueltank with a wax"));
+        services.add(new Services(MOTO,"1.Wash", 10, "Full body wash with active foam"));
+        services.add(new Services(MOTO,"2.Tires wash", 5, "Tires wash with water and active foam"));
+        services.add(new Services(MOTO,"3.Engine wash", 15, "Engine wash with water-soluble engine degreaser"));
+        services.add(new Services(MOTO,"4.Polish", 20, "Polishing with an electric polisher and covering a fueltank with a wax"));
     }
 
     private static void fillServicesForTruck(List<Services> services){
-            services.add(new Services(TRUCK,"Wash", 50, "Full body wash with active foam"));
-            services.add(new Services(TRUCK,"Tires wash", 20, "Tires wash with water and active foam"));
-            services.add(new Services(TRUCK,"Engine wash", 25, "Engine wash with water-soluble engine degreaser"));
-            services.add(new Services(TRUCK,"Vacuum", 15, "Interior cleaning with the vacuum cleaner"));
-            services.add(new Services(TRUCK,"Polish", 30, "Polishing with an electric polisher and covering a truck with a wax"));
+            services.add(new Services(TRUCK,"1.Wash", 50, "Full body wash with active foam"));
+            services.add(new Services(TRUCK,"2.Tires wash", 20, "Tires wash with water and active foam"));
+            services.add(new Services(TRUCK,"3.Engine wash", 25, "Engine wash with water-soluble engine degreaser"));
+            services.add(new Services(TRUCK,"4.Vacuum", 15, "Interior cleaning with the vacuum cleaner"));
+            services.add(new Services(TRUCK,"5.Polish", 30, "Polishing with an electric polisher and covering a truck with a wax"));
         }
 
     static void fillMainMenu(Map<String, List<Services>> menuMap){
