@@ -1,9 +1,10 @@
+import java.util.Iterator;
 import java.util.Set;
 
 public class Basket {
 
-    private static String CURRENCY = "uah";
-
+    static final String CURRENCY = "uah";
+    static final String REGEXTOGETCHARS = "[^A-Za-z]";
     private String vehicle;
     private String service;
     private int price;
@@ -17,8 +18,16 @@ public class Basket {
         this.quantity = quantity;
     }
 
+    public Basket() {
+
+    }
+
     private String getVehicle() {
         return vehicle;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     private String getService() {
@@ -46,18 +55,21 @@ public class Basket {
     static void addServiceBasket (Services serviceToAddToBasket, Set<Basket> bill) {
 
         itemInTheBasketAlready = false;
-        String toBasketVehicle = serviceToAddToBasket.getVehicle();
-        String toBasketService = serviceToAddToBasket.getService();
-        int toBasketPrice = serviceToAddToBasket.getPrice();
 
-        for (Basket curItem : bill){
-            if (curItem.getVehicle().equalsIgnoreCase(serviceToAddToBasket.getVehicle()) &
-                    curItem.getService().equalsIgnoreCase(serviceToAddToBasket.getService())) {
-                itemInTheBasketAlready = true;
-                bill.remove(curItem);
-                bill.add(new Basket(toBasketVehicle, toBasketService, toBasketPrice, curItem.getQuantity() + 1));
-            }
-        }
+        System.out.println(serviceToAddToBasket.getVehicle());
+        System.out.println(serviceToAddToBasket.getService());
+        Iterator<Basket> iterator = bill.iterator();
+           while (iterator.hasNext()){
+               Basket current ;
+               current = iterator.next();
+                 if (current.getVehicle().equalsIgnoreCase(serviceToAddToBasket.getVehicle()) &
+                       current.getService().equalsIgnoreCase(serviceToAddToBasket.getService())) {
+                   itemInTheBasketAlready = true;
+                   int incrementedQuantity = current.getQuantity() + 1;
+                   current.setQuantity(incrementedQuantity);
+               }
+           }
+
         if (!itemInTheBasketAlready) {
             bill.add(new Basket(serviceToAddToBasket.getVehicle(), serviceToAddToBasket.getService(),
                     serviceToAddToBasket.getPrice(), 1));
@@ -78,8 +90,8 @@ public class Basket {
         for (Basket currentItem : bill) {
             billSum = billSum + currentItem.getQuantity() * currentItem.getPrice();
             System.out.format(format,
-                    currentItem.getVehicle().replaceAll("[^A-Za-z]",""),
-                    currentItem.getService().replaceAll("[^A-Za-z]",""),
+                    currentItem.getVehicle().replaceAll(REGEXTOGETCHARS,""),
+                    currentItem.getService().replaceAll(REGEXTOGETCHARS,""),
                     currentItem.getPrice(),
                     currentItem.getQuantity());
         }
